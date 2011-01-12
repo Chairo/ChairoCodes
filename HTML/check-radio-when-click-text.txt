@@ -1,0 +1,1 @@
+ <label for="radio"><input type="radio" name="radio" id="radio" value="radio" />点击文本选中单选框</label>

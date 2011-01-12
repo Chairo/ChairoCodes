@@ -1,0 +1,14 @@
+复制粘贴:
+    Esc返回正常模式,yy复制光标所在行,p粘贴.  v切换到可视模式,hjkl移动光标选择块.y复制,p粘贴.
+显示当前目录:
+    :pwd
+设置文件类型:
+    :set ff=unix dos等
+设置默认目录:
+    :set path=. (.代表当前目录)
+查找文件并打开:
+    :find index.php
+编辑文件:
+    :e index.php
+在新标签打开文件:
+    :tabnew index.php

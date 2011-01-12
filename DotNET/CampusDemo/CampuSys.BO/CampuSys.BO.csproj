@@ -1,0 +1,73 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F214A85F-E7F3-43DB-A388-8695409063D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CampuSys.BO</RootNamespace>
+    <AssemblyName>CampuSys.BO</AssemblyName>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BOException.cs" />
+    <Compile Include="Campus\CampusSearchLog.cs" />
+    <Compile Include="Campus\CampusSearchLogDAO.cs" />
+    <Compile Include="Campus\EhrCompanyInfo.cs" />
+    <Compile Include="Campus\EhrCompanyInfoDAO.cs" />
+    <Compile Include="Campus\SearchCondition.cs" />
+    <Compile Include="Campus\StudentLog.cs" />
+    <Compile Include="Campus\StudentLogDAO.cs" />
+    <Compile Include="Data\CampusDBConfig.cs" />
+    <Compile Include="Campus\CampusJob.cs" />
+    <Compile Include="Campus\CampusJobDAO.cs" />
+    <Compile Include="Data\EhrDBConfig.cs" />
+    <Compile Include="System\CookieManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\DataManager.cs" />
+    <Compile Include="System\PageTureMgr.cs" />
+    <Compile Include="System\Session.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CampuSys.Core\CampuSys.Core.csproj">
+      <Project>{23A4FB23-0615-4306-89FD-6CB475B74C83}</Project>
+      <Name>CampuSys.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,4 @@
+<metahttp-equiv="pragma"content="no-cache"></metahttp-equiv="pragma"content="no-cache">
+<metahttp-equiv="cache-control"content="no-cache,must-revalidate"></metahttp-equiv="cache-control"content="no-cache,must-revalidate">
+
+Лђеп<metahttp-equiv="expires"content="0"></metahttp-equiv="expires"content="0">

@@ -1,0 +1,11 @@
+EnCrypt.php    加密/解密函数
+hide-email.php    Email转换成Ascii码逃避Email Spam Robots抓取
+ip2number&number2ip.php    ip转换成数字,数字转换成ip
+no-cache.php    不缓存网页
+read-php.net-function-list-for-uestudio-wordfile.php    根据php.net的函数列表为UeStudio生成WordFile
+read-folder-and-files.php    读取文件夹及文件夹里文件
+mod_deflate-and-gzip-compress-page.txt 用mod_deflate和GZip压缩页面
+zip.php    在线解压缩文件
+tz.php    带广告PHP探针
+2008.php    在线管理网站(phpspy木马)
+dns-tool.zip    查询dns的工具

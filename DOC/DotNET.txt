@@ -1,0 +1,7 @@
+create-webservices-proxy-class.c    wsdl生成代理类另生成组件
+wse3.0-setup.txt    WSE3.0安装使用
+how-to-use-database.txt    database操作数据库
+oprate-xml-of-namespace.txt    操作带命名空间的XML
+split.txt   split拆分字符串成数组
+dataset2excel.txt    Dataset导出到excel
+SendMail.cs    发邮件类

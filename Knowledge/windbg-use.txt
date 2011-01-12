@@ -1,0 +1,149 @@
+ 【蛙蛙推荐】windbg使用小总结
+用windbg有一段时间了，今天抽空总结一点经验与大家分享
+【抓dump】
+1、一般抓法
+adplus -hang -p 3230 -quiet 抓3230 pid进程，hang模式，相当于把那个进程暂停住，取内存快照
+adplus -crash -pn w3wp -quiet 抓w3wp进程，crash模式，当那个进程崩溃结束的时候自动抓取当时的内存
+adplus -hang -iis -quiet 抓IIS相关进程，包括其上host的web应用，以及iis自身
+2、抓window服务
+http://support.microsoft.com/kb/824344/zh-cn
+3、远程抓
+http://blog.joycode.com/tingwang/archive/2006/08/11/79763.aspx
+4、抓蓝屏和死机的dump
+电脑无故重启或者蓝屏会在C:\WINDOWS\Minidump\下保存一个minidump，但是这个minidump可用的命令很少，一般只打!analyze –v看到是哪个进程引起的，还有相关的驱动模块就基本定位问题了。
+5、IIS回收的时候抓
+http://blog.yesky.com/blog/omakey/archive/2006/12/17/1618015.html
+6、计划任务抓
+比如一个进程起来后不知道它什么时候会意外崩溃，可以在计划任务里用crash里抓，当那个进程意外终止的时候，cdb可以直接附加上去，抓取当时的dump，如果要抓一些会自动重启的进程，而且要抓每次重启前的dump，可以参考附录里一节。
+【常用命令】
+1、先path C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727，把.net路径设置为path环境变量，一遍在windbg里可以直接.load sos，而不必.load C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\sos.dll
+2、ld demo，加载你程序的pdb文件，调试.net程序一般要把kernel32和mscorwks的符号加载上，关于这两个东西大家可以查资料，尤其是后者有哪些函数可以多了解一些。
+3、在windbg的file/symbol file path对话框里输入以下文字，以便自动加载和下载符号
+C:\WINDOWS\Symbols;d:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\symbols;.sympath SRV*d:\localsymbols*http://msdl.microsoft.com/download/symbols
+其中有windows、.net2.0和自动从网上下载的调试符号，注意根据自己的情况适当修改目录
+【调试死锁】
+1、!syncblk，查看哪些线程拿到了锁
+2、~67e!clrstack 跳到某个拿到锁的线程看它正在干什么操作，迟迟不肯释放锁
+3、!runaway 查看这个占有锁的线程运行了多长时间。
+4、~*e!clrstack查看所有线程的托管堆栈，看看哪些是正在等待锁的，比如hang在System.Threading.Monitor.Enter(System.Object)
+5、~136s选择该线程，显示如下
+0:000> ~136s eax=00005763 ebx=08deeb5c ecx=03eff0d4 edx=5570ab69 esi=08deeb5c edi=7ffd6000 eip=7c95ed54 esp=08deeb10 ebp=08deebb8 iopl=0 nv up ei pl zr na pe nc cs=001b ss=0023 ds=0023 es=0023 fs=003b gs=0000 efl=00000246 ntdll!KiFastSystemCallRet: 7c95ed54 c3 ret
+找到ecx寄存器的值，复制后ctrl+f，向上查找，会找到!syncblk的地方，如下
+0:000> !syncblk Index SyncBlock MonitorHeld Recursion Owning Thread Info SyncBlock Owner 1906 03ee4be4 5 1 03ee8f88 22c8 67 185e2ef0 System.Object 5390 052ca39c 3 1 05292b30 1dd4 49 1060d3ac System.Object 9372 0530702c 15 1 0012d3a8 1aa8 80 185e7704 System.Object 11428 03eff0d4 35 1 053b8fa8 169c 120 166acd98 System.Object 15278 0531c6b4 61 1 06bc1430 26d8 86 1a5bea88 System.Object
+可以看到136线程等待的锁被120号线程占着不放（格式有点乱，凑合看），
+6、有时候通过ecx寄存器找锁不是很确定，可以用~* kb来把所有线程堆栈打出来，然后根据!syncblk出来的同步快的值去搜索大概有多少个线程在等那个锁。因为同样是等待锁，可等的状态不一样，有的在 Q里，有的锁已经升级，有的去尝试去拿锁了，所以不一定当时ecx寄存器指向那块内存，具体如何找到某个正在等待锁的线程等待的锁的内存地址，以及它正等待的这个锁被哪个线程拿着，我还没琢磨出规律来，但一般情况下，如果有其它同步对象的话，更难查。.net里用我上面说的几步就能查出锁的问题了。
+【内存泄漏】
+1、!dumpheap -stat看看哪些对象个数最多，占内存最大，
+2、找到某个格式比较多的对象，可以看它的方法表，然后用!dumpheap -mt 66398fa4去随机找几个对象的地址
+3、用!do 1e5a22bc命令去查看几个对象的状态，属性的值等，看看正常不正常
+4、用!gcroot -nostacks 1e5a22bc去查看几个对象的根正常不正常，如果有些对象的根不是自己预先设计的那样，很可能被自己没想到的对象强引用了，所以GC无法回收它，就泄漏了。
+【CPU百分百】
+主要用几个计数器和!runaway命令，具体见以下链接
+http://www.cnblogs.com/onlytiancai/archive/2007/12/archive/2007/06/03/769307.html
+【线程池耗尽】
+!threadpool 能看到完成端口，线程池工作线程和timer回调各占线程池的情况。
+【其它】
+1、!eestack -short -ee查看所有重要(获取锁的，托管的，停止并允许回收的)线程的dumpstack，差不多相当于~*e!dumpstack
+2、.time 可以看到进程跑了多少时间
+3、!dso 查看当前线程里有哪些对象，分析内存泄漏问题也许会用到
+4、!threads查看所有托管线程，可以看到有哪些僵尸线程，后台线程，阻塞线程，还有一个线程列表，每个线程上的锁计数，gc,是否有异常，是否是线程池线程，是否是完成端口线程等。
+还有一些常用的命令，!dumpdomain,!name2ee等就不细说了，详细见以下的sos参考，中文的
+http://files.cnblogs.com/onlytiancai/sos%E5%8F%82%E8%80%83.zip
+【小结】
+要想很好的用windbg排查.net问题，首先要了解一些clr宿主的基础知识，以及IL的一些基础，还有简单的寄存器和汇编尝试，再就是有个好的思路，最后就是经验和对代码逻辑的理解。
+【附录：写了一个自动抓dump的工具，可在程序异常退出的时候抓dump】
+【使用方法】
+1、先在cmd下运行以下命令确保计划任务开着
+net start "task scheduler"
+2、执行以下命令安排自动抓包
+at 13:27 d:\myapp\autodump\processmon.exe
+其中计划启动的时间和自动抓包的程序路径要根据情况设置，计划启动之前当前用户一定要注销。
+【相关配置】
+<appSettings>
+  <add key="adplusPath" value="D:\MyApp\Debugging\adplus.vbs"/><!--adplus的路径-->
+  <add key="ProcessName" value="w3wp"/><!--要抓dump的进程的名字，可用部分名字，不用完整的-->
+</appSettings>
+
+【源码】
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
+
+namespace ProcessMon
+{
+    class Program
+    {
+        static readonly List<int> _dumpPIDs = new List<int>();
+        private static readonly string _processName = System.Configuration.ConfigurationManager.AppSettings["ProcessName"];
+        private static readonly string _adplusPath = System.Configuration.ConfigurationManager.AppSettings["adplusPath"];
+        static void Main(string[] args)
+        {
+            while(true)
+            {
+                Console.WriteLine("..");
+                ThreadProc();
+                Thread.Sleep(10000);
+            }
+        }
+
+        private static void ThreadProc()
+        {
+            foreach(Process vProcess in Process.GetProcesses())
+            {
+                try
+                {
+                    string   processName   =   vProcess.ProcessName.ToLower();
+                    if (processName.IndexOf(_processName) >= 0)
+                    {
+                        Console.WriteLine("{0}-{1}", vProcess.ProcessName, vProcess.Id);
+
+                        if (_dumpPIDs.Contains(vProcess.Id))
+                            continue;
+                        _dumpPIDs.Add(vProcess.Id);
+
+                        DumpProcessDeg d = DumpProcess;
+                        d.BeginInvoke(vProcess.Id, null, null);
+                        DumpProcess(vProcess.Id);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+            }
+        }
+
+        private delegate void DumpProcessDeg(int pid);
+        static  void  DumpProcess(int pid)
+        {
+            ProcessStartInfo  Info  =  new  System.Diagnostics.ProcessStartInfo();
+            Info.FileName = _adplusPath;
+            Info.Arguments = string.Format("-crash -p {0} -quiet",pid);
+            Info.WorkingDirectory  =  "C:\\";
+            Process  Proc  ;
+            try
+            {
+                Proc  =  Process.Start(Info);
+            }
+            catch(System.ComponentModel.Win32Exception  e)
+            {
+                Console.WriteLine("系统找不到指定的程序文件。\r{0}",  e);
+                return;
+            }
+            Proc.EnableRaisingEvents = true;
+            Console.WriteLine("外部程序的开始执行时间：{0}",  Proc.StartTime);
+            Proc.WaitForExit(60000);
+            if(Proc.HasExited  ==  false){
+                Console.WriteLine("由主程序强行终止外部程序的运行！");
+                Proc.Kill();
+            }
+            else{
+                Console.WriteLine("由外部程序正常退出！");
+            }
+            Console.WriteLine("外部程序的结束运行时间：{0}",  Proc.ExitTime);
+            Console.WriteLine("外部程序在结束运行时的返回值：{0}",  Proc.ExitCode);
+        }
+    }
+}

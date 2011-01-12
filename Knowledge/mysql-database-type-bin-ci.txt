@@ -1,0 +1,178 @@
+gb2312_chinese_CI: 只支持简体中文
+
+gb2312_BIN    :而gb2312_bin可以说是gb2312_chinese_ci的一个子集，
+
+而且gb2312_BIN是二进制存储.区分大小写
+
+gb2312_chinese_CI: 只支持简体中文
+
+gb2312_BIN    :而gb2312_bin可以说是gb2312_chinese_ci的一个子集，
+
+而且gb2312_BIN是二进制存储.区分大小写
+
+数据库编码格式就意义不一样了
+gbk_chinese_CI支持简体中文和繁体
+
+gbk_bin解释同gb2312_BIN 对应gbk_chinese_CI
+mysql字符集和整理列表
+
+armscii8 (ARMSCII-8 Armenian)
+armscii8_bin   	亚美尼亚语, 二进制
+armscii8_general_ci   	亚美尼亚语, 不区分大小写
+ascii (US ASCII)
+ascii_bin   	西欧 (多语言), 二进制
+ascii_general_ci   	西欧 (多语言), 不区分大小写
+big5 (Big5 Traditional Chinese)
+big5_bin   	繁体中文, 二进制
+big5_chinese_ci   	繁体中文, 不区分大小写
+binary (Binary pseudo charset)
+binary   	二进制
+cp1250 (Windows Central European)
+cp1250_bin   	中欧 (多语言), 二进制
+cp1250_croatian_ci   	克罗地亚语, 不区分大小写
+cp1250_czech_cs   	捷克语, 区分大小写
+cp1250_general_ci   	中欧 (多语言), 不区分大小写
+cp1251 (Windows Cyrillic)
+cp1251_bin   	西里尔语 (多语言), 二进制
+cp1251_bulgarian_ci   	保加利亚语, 不区分大小写
+cp1251_general_ci   	西里尔语 (多语言), 不区分大小写
+cp1251_general_cs   	西里尔语 (多语言), 区分大小写
+cp1251_ukrainian_ci   	乌克兰语, 不区分大小写
+cp1256 (Windows Arabic)
+cp1256_bin   	阿拉伯语, 二进制
+cp1256_general_ci   	阿拉伯语, 不区分大小写
+cp1257 (Windows Baltic)
+cp1257_bin   	巴拉克语 (多语言), 二进制
+cp1257_general_ci   	巴拉克语 (多语言), 不区分大小写
+cp1257_lithuanian_ci   	立陶宛语, 不区分大小写
+cp850 (DOS West European)
+cp850_bin   	西欧 (多语言), 二进制
+cp850_general_ci   	西欧 (多语言), 不区分大小写
+cp852 (DOS Central European)
+cp852_bin   	中欧 (多语言), 二进制
+cp852_general_ci   	中欧 (多语言), 不区分大小写
+cp866 (DOS Russian)
+cp866_bin   	俄语, 二进制
+cp866_general_ci   	俄语, 不区分大小写
+cp932 (SJIS for Windows Japanese)
+cp932_bin   	日语, 二进制
+cp932_japanese_ci   	日语, 不区分大小写
+dec8 (DEC West European)
+dec8_bin   	西欧 (多语言), 二进制
+dec8_swedish_ci   	瑞典语, 不区分大小写
+euckr (EUC-KR Korean)
+euckr_bin   	朝鲜语, 二进制
+euckr_korean_ci   	朝鲜语, 不区分大小写
+gb2312 (GB2312 Simplified Chinese)
+gb2312_bin   	简体中文, 二进制
+gb2312_chinese_ci   	简体中文, 不区分大小写
+gbk (GBK Simplified Chinese)
+gbk_bin   	简体中文, 二进制
+gbk_chinese_ci   	简体中文, 不区分大小写
+geostd8 (GEOSTD8 Georgian)
+geostd8_bin   	乔治亚语, 二进制
+geostd8_general_ci   	乔治亚语, 不区分大小写
+greek (ISO 8859-7 Greek)
+greek_bin   	希腊语, 二进制
+greek_general_ci   	希腊语, 不区分大小写
+hebrew (ISO 8859-8 Hebrew)
+hebrew_bin   	希伯来语, 二进制
+hebrew_general_ci   	希伯来语, 不区分大小写
+hp8 (HP West European)
+hp8_bin   	西欧 (多语言), 二进制
+hp8_english_ci   	英语, 不区分大小写
+keybcs2 (DOS Kamenicky Czech-Slovak)
+keybcs2_bin   	捷克斯洛伐克语, 二进制
+keybcs2_general_ci   	捷克斯洛伐克语, 不区分大小写
+koi8r (KOI8-R Relcom Russian)
+koi8r_bin   	俄语, 二进制
+koi8r_general_ci   	俄语, 不区分大小写
+koi8u (KOI8-U Ukrainian)
+koi8u_bin   	乌克兰语, 二进制
+koi8u_general_ci   	乌克兰语, 不区分大小写
+latin1 (cp1252 West European)
+latin1_bin   	西欧 (多语言), 二进制
+latin1_danish_ci   	丹麦语, 不区分大小写
+latin1_general_ci   	西欧 (多语言), 不区分大小写
+latin1_general_cs   	西欧 (多语言), 区分大小写
+latin1_german1_ci   	德语 (字典), 不区分大小写
+latin1_german2_ci   	德语 (电话本), 不区分大小写
+latin1_spanish_ci   	西班牙语, 不区分大小写
+latin1_swedish_ci   	瑞典语, 不区分大小写
+
+latin2 (ISO 8859-2 Central European)
+latin2_bin   	中欧 (多语言), 二进制
+latin2_croatian_ci   	克罗地亚语, 不区分大小写
+latin2_czech_cs   	捷克语, 区分大小写
+latin2_general_ci   	中欧 (多语言), 不区分大小写
+latin2_hungarian_ci   	匈牙利语, 不区分大小写
+latin5 (ISO 8859-9 Turkish)
+latin5_bin   	土耳其语, 二进制
+latin5_turkish_ci   	土耳其语, 不区分大小写
+latin7 (ISO 8859-13 Baltic)
+latin7_bin   	巴拉克语 (多语言), 二进制
+latin7_estonian_cs   	爱沙尼亚语, 区分大小写
+latin7_general_ci   	巴拉克语 (多语言), 不区分大小写
+latin7_general_cs   	巴拉克语 (多语言), 区分大小写
+macce (Mac Central European)
+macce_bin   	中欧 (多语言), 二进制
+macce_general_ci   	中欧 (多语言), 不区分大小写
+macroman (Mac West European)
+macroman_bin   	西欧 (多语言), 二进制
+macroman_general_ci   	西欧 (多语言), 不区分大小写
+sjis (Shift-JIS Japanese)
+sjis_bin   	日语, 二进制
+sjis_japanese_ci   	日语, 不区分大小写
+swe7 (7bit Swedish)
+swe7_bin   	瑞典语, 二进制
+swe7_swedish_ci   	瑞典语, 不区分大小写
+tis620 (TIS620 Thai)
+tis620_bin   	泰语, 二进制
+tis620_thai_ci   	泰语, 不区分大小写
+ucs2 (UCS-2 Unicode)
+ucs2_bin   	Unicode (多语言), 二进制
+ucs2_czech_ci   	捷克语, 不区分大小写
+ucs2_danish_ci   	丹麦语, 不区分大小写
+ucs2_estonian_ci   	爱沙尼亚语, 不区分大小写
+ucs2_general_ci   	Unicode (多语言), 不区分大小写
+ucs2_icelandic_ci   	冰岛语, 不区分大小写
+ucs2_latvian_ci   	拉脱维亚语, 不区分大小写
+ucs2_lithuanian_ci   	立陶宛语, 不区分大小写
+ucs2_persian_ci   	波斯语, 不区分大小写
+ucs2_polish_ci   	波兰语, 不区分大小写
+ucs2_roman_ci   	西欧, 不区分大小写
+ucs2_romanian_ci   	罗马尼亚语, 不区分大小写
+ucs2_slovak_ci   	斯洛伐克语, 不区分大小写
+ucs2_slovenian_ci   	斯洛文尼亚语, 不区分大小写
+ucs2_spanish2_ci   	传统西班牙语, 不区分大小写
+ucs2_spanish_ci   	西班牙语, 不区分大小写
+ucs2_swedish_ci   	瑞典语, 不区分大小写
+ucs2_turkish_ci   	土耳其语, 不区分大小写
+ucs2_unicode_ci   	Unicode (多语言), 不区分大小写
+ujis (EUC-JP Japanese)
+ujis_bin   	日语, 二进制
+ujis_japanese_ci   	日语, 不区分大小写
+utf8 (UTF-8 Unicode)
+utf8_bin   	Unicode (多语言), 二进制
+utf8_czech_ci   	捷克语, 不区分大小写
+utf8_danish_ci   	丹麦语, 不区分大小写
+utf8_estonian_ci   	爱沙尼亚语, 不区分大小写
+utf8_general_ci   	Unicode (多语言), 不区分大小写
+utf8_icelandic_ci   	冰岛语, 不区分大小写
+utf8_latvian_ci   	拉脱维亚语, 不区分大小写
+utf8_lithuanian_ci   	立陶宛语, 不区分大小写
+utf8_persian_ci   	波斯语, 不区分大小写
+utf8_polish_ci   	波兰语, 不区分大小写
+utf8_roman_ci   	西欧, 不区分大小写
+utf8_romanian_ci   	罗马尼亚语, 不区分大小写
+utf8_slovak_ci   	斯洛伐克语, 不区分大小写
+utf8_slovenian_ci   	斯洛文尼亚语, 不区分大小写
+utf8_spanish2_ci   	传统西班牙语, 不区分大小写
+utf8_spanish_ci   	西班牙语, 不区分大小写
+utf8_swedish_ci   	瑞典语, 不区分大小写
+utf8_turkish_ci   	土耳其语, 不区分大小写
+utf8_unicode_ci   	Unicode (多语言), 不区分大小写
+
+另外utf8_unicode_ci 和utf8_general_ci  的区别据说是utf8_general_ci  转换其他语言的时候速度快,utf8_unicode_ci 则是更准确~具体要看过Mysql的手册才能确定..不过Origami建议还是选择 utf8_unicode_ci 编码作为默认数据库编码,原因只是因为Origami的个人喜好
+
+PS:转载的文章是以前DownLoad的一个整页.版权未知.

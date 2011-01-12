@@ -1,0 +1,74 @@
+/* Public BOF*/
+body {background: white;font-family: Arial, Helvetica, sans-serif;font-size: 0.8em;color: #646464;}
+.clearfix:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+.clearfix {display: inline-block;}
+.strong {font-weight:600;}
+
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+/* End hide from IE-mac */
+
+.txt-center {text-align:center;}
+.left {float: left;}
+.right {float: right;}
+.center {margin-left: auto;margin-right: auto;}
+/* Public EOF*/
+
+/* list table use style BOF */
+.highlight {/* highlight line background color */background:#d5fcdc;}
+.even {/* even line background color */background:#fff;}
+.mo {/* mouse enter line background color */background:#e3f1fb;}
+.odd {/* odd line background color */background:#eee;}
+.list-table th {padding:5px;background:#ddd;border-bottom:1px solid #999;font-weight:600;}
+.list-table td {padding:5px 20px 5px 5px;border-bottom:1px solid #ddd;}
+/* list table use style BOF */
+
+/* Header BOF */
+#header-title{width:100%;height:65px;padding-top:1em;}
+#header-title li{float:right;}
+#logo a{float:left;color:#356aa0;font-size:30px;line-height:65px;text-decoration:none;text-shadow: #a2a2a2 0px 0px 5px;font-weight:bold;}
+#description{float:left;color:#777;font-size:12px;margin:30px auto auto 5px;}
+/* Header EOF */
+
+/* Menu BOF */
+#menu{width:960px;overflow:hidden;}
+.nav li, #header-title li{display:block;border:1px solid #CACACA;margin-right:-1px;margin-bottom:10px;}
+.nav li{float:left;}
+.nav li a, #header-title li a{font-size:14px;text-align:center;color:#555;display:block;padding:7px 17px;white-space:nowrap;font-weight:bold;background:#ffffff;}
+.nav li a:hover,#header-title li a:hover{color:#356aa0;text-shadow: #A2A2A2 0px 0px 5px;background:#f0f0f0;background:url(../images/nav_bg.gif) repeat-x;}
+/* Menu EOF */
+
+/* Main BOF */
+#content{width:100%;padding:20px 0 0;}
+#postlist,#left-content-single{width:705px;float:left;}
+#xiangguan,.post-home{border:1px solid #CACACA; position:relative;margin-bottom:1.5em;background:url(bg.png) repeat-x bottom;background-color:#fff;}
+.post-title h2{font-size:120%;line-height:25px;margin-top:5px;max-width:600px;font-weight:bold;text-shadow: #a2a2a2 0px 0px 5px;}
+.post-title h2 a{padding:5px 10px;color:#356aa0;font-weight:bold;text-shadow: #a2a2a2 0px 0px 5px;}
+.post-title-single h1{color:#356aa0;font-size:120%; line-height:25px;margin-top:3px;padding:5px 10px;font-weight:bold;text-shadow: #a2a2a2 0px 0px 5px;}
+.post-title-single span{position:absolute;top:0px;right:0px;padding:2px;border:1px solid #CACACA;border-top:none;border-right:none;}
+.post-messages{height:29px;width:706px;overflow:hidden;}
+.more-link,.post-messages a{color:#356aa0;font-weight:bold;}
+.more-link:hover,.post-messages a:hover{border-bottom:1px solid #6699CC;}
+.post-messages-navigation{float:left;border:1px solid #CACACA;margin:0 0 -1px -1px;color:#777;padding:3px 10px;height:22px;text-shadow: #a2a2a2 0px 0px 5px;font-size:12px;}
+.post-messages-more{position:absolute;top:0px;right:0px;padding:3px 10px;border:1px solid #CACACA;border-top:none;border-right:none;text-shadow: #a2a2a2 0px 0px 5px;}
+.more-link{position:absolute;bottom:0px;right:0px;padding:3px 10px;border:1px solid #CACACA;border-bottom:none;border-right:none;text-shadow: #a2a2a2 0px 0px 5px;}
+.more-link{float:right;}
+/* Main EOF */
+
+/* Sidebar BOF */
+#sidebar {width:240px;overflow:hidden;float:right;font-size:12px;display:inline;}
+#sidebar ul{list-style:none;backgorund:#E5E5E5;}
+#sidebar li{overflow:hidden;_zoom:1;}
+#sidebar span{padding:3px 10px;border-bottom:1px solid #CACACA;border-right:1px solid #CACACA;}
+#sidebar h3{color:#666;font-size:15px;font-weight:400;text-shadow: #A2A2A2 0px 0px 5px;font-weight:bold;}
+#sidebar a:hover{color:#356aa0;}
+#today{border:1px solid #CACACA;}
+.widget_recent_entries,.widget_recent_comments,.widget_calendar,.widget_links,.widget_categories,.widget_meta,.widget_text,.widget_archive,.widget_tag_cloud,.widget_pages{width:238px;border:1px solid #CACACA;margin-bottom:1.5em;overflow:hidden;}
+.widget_categories ul{padding:5px 10px !important;overflow:hidden;}
+.widget_categories ul li{padding:0 0 2px 8px !important;line-height:20px;float:left;width:45%;}
+/* Sidebar EOF */
+
+/* Footer BOF */
+
+/* Footer EOF */

@@ -1,0 +1,18 @@
+upstream  campusys2008vss.chinahr.com 
+    {  
+        server   10.1.10.52:80;
+        #server   10.1.10.48:80;
+    }
+    server {
+        listen       8000;
+        server_name  campusys2008vss.chinahr.com;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            proxy_pass  http://campusys2008vss.chinahr.com/;
+            proxy_redirect  default;
+        }
+    }

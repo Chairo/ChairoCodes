@@ -1,0 +1,76 @@
+1.文本类型
+char
+用法：char(length)
+char类型最大长度是255个字符。当插入到表中的字符串的长度小于length时候，将给字段右边不够的部分用空格填补。
+varchar
+用法：varchar(length)
+varchar的最大长度是255个字符。varchar和char几乎一样，区别在于varchar是变长的类型，不会填补空格。
+tinytext
+用法：tinytext
+tinytext最大长度是255字符。
+text
+用法：text
+text最大长度是65535(2的17次方)字符。
+mediumtext
+用法:mediumtext
+mediumtext最大长度是16777215个字符。
+longtext
+用法：longtext
+longtext最大长度是4294976259个字符。
+(tinytext,text,mediumtext,longtext这四种类型，都是可边长字段类型，与varchar一样，只是最大长度不同而已)
+enum
+用法:enum('value1','value2','value3',....)[default 'value']
+使用enum的时候,可以限制插入的值只能是括号里包含的值列表中的一个，同时也可以用可选的default 'value'指定缺省情况下的值。
+set
+用法：set('value1','value2','value3',...)[default 'value']
+使用set的时候,可以限制插入的值只能是括号里包含的值列表中的一个或多个，同时也可以用可选的default 'value'指定缺省情况下的值。
+2.数字类型
+int/integer
+用法：int(display size)[unsigned][zerofill]
+一个正常大小整数。有符号的范围是-2147483648到2147483647，无符号的范围是0到4294967295。
+tinyint
+用法：tinyint(display size)[unsigned][zerofill]
+一个很小的整数。有符号的范围是-128到127，无符号的范围是0到255
+mediumint
+用法：mediumint(display size)[unsigned][zerofill]
+一个中等大小整数。有符号的范围是-8388608到8388607，无符号的范围是0到16777215。
+bigint
+用法：bigint(display size)[unsigned][zerofill]
+一个大整数。有符号的范围是-9223372036854775808到9223372036854775807，无符号的范围是0到 18446744073709551615。注意，所有算术运算用有符号的BIGINT或DOUBLE值完成，因此你不应该使用大于 9223372036854775807（63位)的有符号大整数，除了位函数！
+float
+//用法：float()[zerofill]
+用法：float[(m,d)][zerofill]
+表示一个小的浮点数(单精度)，不能是无符号数。m表示显示宽度，d表示精度。
+一个小(单精密)浮点数字。不能无符号。允许的值是-3.402823466E+38到-1.175494351E-38，0和1.175494351E-38到3.402823466E+38。
+double
+用法：double[(m,d)][zerofill]
+表示一个双精度浮点数，不能是无符号数。m表示显示宽度，d表示精度。
+一个正常大小(双精密)浮点数字。不能无符号。允许的值是-1.7976931348623157E+308到-2.2250738585072014E-308、0和2.2250738585072014E-308到1.7976931348623157E+308。
+decimal/numeric
+用法：decimal[(m[,d])][zerofill]
+decimal列中的数字被存储为字符，每个数字被存储为一个字符串，每个字符代表值的每一位数。如果d为0则表示没有小数点。decimal的最大范围和double一样，但是实际的范围是给定的参数m指定的，如果省略m，则m为0。
+3.日期和时间类
+date
+用法：date
+date类型以YYYY-MM-DD格式存储数据。它允许1000-01-01到9999-12-31之间的值。
+datetime
+用法：datetime[null | not null][default]
+datetime类型以YYYY-MM-DD HH:MM:SS格式存储数据。
+timestamp
+用法：timestamp(format)
+format可以是2到14间的任意数字。
+下面是format数字的对照列表：
+2    YY
+4    YYMM
+6    YYMMDD
+8    YYYYMMDD
+10   YYMMDDHHMM
+12   YYMMDDHHMMSS
+14   YYYYMMDDHHMMSS
+time
+用法：time
+以HH:MM:SS格式存储时间数据。
+year
+用法：year[(2 | 4)]
+用2位数字格式，允许的日期是1970到2069之间的年份。(79到99的前面加19，01到69的前面加20)
+用4为数字格式允许1901到2155之间的值。

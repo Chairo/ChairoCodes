@@ -1,0 +1,26 @@
+拆分条件是单字符:
+
+    string s="13131|23424|";
+    string[] sArray=s.Split('|');
+    Console.WriteLine(i.ToString());
+
+拆分条件是数组:
+
+    s
+    tring words = "要拆分的|字符串|字符:串:测试";
+    char[] charSeparators = new Char[] {'|',':'};
+    string[] split = words.Split(charSeparators);
+    foreach (string s in split)
+    {
+    if (s.Trim() != "")
+    {
+    Console.WriteLine(s);
+    }
+    }
+
+拆分条件是字符串(需要添加引用using System.Text.RegularExpressions;):
+
+    string content="要拆分的字符串条件要拆分的字符串条件要拆分的字符串";
+    string[] resultString = Regex.Split(content, "条件",RegexOptions.IgnoreCase);
+    foreach(string i in resultString)
+    Console.WriteLine(i.ToString());

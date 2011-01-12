@@ -1,0 +1,135 @@
+【国外篇】
+国外安全 http://www.neohapsis.com/ 内容极为丰富
+国外安全 http://www.deadly.org/ 大量关于OpenBSD的资料文档教程
+国外安全 http://www.guninski.com/ 安全专家Guninski的主页，有大量由系统漏洞
+国外安全 http://www.sysinternals.com 有很好的windows下的工具及源代码
+国外安全 http://www.securityflaw.com/bible/ 入侵检测等文档整理较好的站点
+国外安全 http://www.secinf.net/ 网络安全方面的大量文档
+国外安全 http://www.incident-response.org 入侵反应，数据恢复工具等
+国外安全 http://www.securityfocus.com/ 安全资料整合最好的站
+国外安全 http://www.project.honeynet.org/ 由安全界一帮牛人组织的一个project
+国外安全 http://www.packetstormsecurity.com 资料全面的安全站
+国外安全 http://www.securityportal.com/ 还可以看看的安全站
+国外安全 http://www.ussrback.com/ 比较活跃的安全站
+国外安全 http://www.attrition.org/ 内容全面的安全站
+国外安全 http://www.wiretrip.net/rfp/2/index.asprfp 的安全主页，提供权威的安全信息
+国外安全 http://www.antionline.com/ 有些特色栏目的安全站
+国外安全 http://www.eeye.com/eeye 公司的主页，提供权威性的安全建议和工具
+国外安全 http://www.insecure.org/Fyodor 的主页，nmap的老家，还有exploit
+国外安全 http://www.atstake.com/@stack 公司的主页，提供权威的安全建议
+国外安全 http://www.bugnet.com/ 提供漏洞修补 国外黑客 http://lsd-pl.net/LsD 的站,最新最有效的exploit
+国外黑客 http://www.s0ftpj.org 提供一些水平很高的小工具
+国外黑客 http://phrack.org/Phrack 的主页，经典的黑客技术电子杂志
+国外黑客 http://www.w00w00.org/w00w00 组织的主页
+国外黑客 http://mixter.void.ru/Mixter 的个人主页，不少有用的工具
+国外黑客 http://www.thehackerschoice.com/THC 黑客组织的页面，很好的安全文档和工具
+国外黑客http://www.win2000mag.netWindows&.NETMagazineNetwork 绝对专业的站点,文章都是一流的
+国外黑客 http://www.2600.com/2600Magazine
+国外黑客 http://www.experts-exchange.com 全球有名的社区
+国外黑客 http://www.is-it-true.org 类似于FAQ的站点，资源丰富
+国外黑客 http://www.mixter.warrior2k.commixtersecurity
+国外黑客 http://www.liun.hektik.orgLongIslandourUndergroundNetworks
+国外黑客 http://www.ussrback.comussrisback
+国外黑客 http://www.securiteam.com 非常好的安全文章漏洞利用工具下载站点
+国外黑客 http://www.lsd-pl.netTheLastStageofDeliriumResearchGroup
+国外黑客 http://www.neworder.box.skBoxNetworkteam
+国外黑客 http://www.sysinternals.comsysinternals
+国外黑客 http://www.webattack.comWebAttackInc
+国外黑客 http://www.blackhat.comBlackHat , Inc
+国外黑客 http://p.ulh.aspulhas
+国外常用网站站点 http://www.google.com 最好的页面搜索引擎
+国外常用网站站点 http://www.netcraft.com 很好的域名搜索引擎
+国外常用网站站点 http://www.checkdomain.com 域名信息检索器
+国外常用网站站点 http://astalavista.box.sk 最好的注册码、注册机、序列号搜索引擎
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+【国内篇】
+国内安全http://www.eviloctal.com 邪恶八进制（重点推荐 ）
+国内安全 http://www.bnso.net/B.C.T （国内漏洞更新速度第二 ）
+国内安全 http://www.xyhack.com/ 星缘联盟
+国内安全 http://security.zz.ha.cn/ 起点安全，有相当不错的原创内容
+国内安全 http://www.shopsky.com/flashsky 的个人主页
+国内安全 http://www.safechina.net 有较多原创内容的安全站
+国内安全 http://www.opengram.comrefdom 的个人主页，windows相关
+国内安全 http://www.ishacker.comDigitalBrain 的个人主页
+国内安全 http://www.peckerland.com/
+国内安全 http://www.janker.org/ 孤独剑客
+国内安全 http://e4gle.orge4gle 的个人主页
+国内安全 http://www.lbfok.com 适合广大菜鸟的个人站点
+国内安全 http://www.sunx.orgsunx 的个人主页
+国内安全 http://www.ns-one.comrootshell 的个人主页
+国内安全 http://www.snake.gnuchina.orgsnake 的个人主页
+国内安全 http://www.vertarmy.org 绿色兵团
+国内安全 http://www.cnns.net 安络科技
+国内安全 http://www.topwalk.com 天行网安公司主页
+国内安全 http://www.nsfocus.com 中联绿盟公司主页
+国内安全 http://www.lisoleg.net 利索脚
+国内安全 http://www.chinafirst.org.cn 中国信息安全论坛
+国内安全 http://sinbad.zhoubin.com/sinbad 网络安全
+国内安全 http://www.safen.org 中国安全在线
+国内安全 http://www.xfocus.net 安全焦点
+国内安全 http://www.chinaitlab.com 中国IT认证实验室
+国内安全 http://www.patching.net 南京补天网
+国内安全 http://www.cnnf.org 中国网络安全阵线
+国内安全http://www.microsoft.com/technet/secur ... icrosoftTechNetSecurity
+国内安全 http://www.chinafirst.org.cn 中国信息安全论坛
+国内安全 http://www.aqwl.com 中国安全网络中心
+国内安全 http://www.505net.net505net 急救网
+国内安全 http://www.bluedon.com 蓝盾安全在线
+国内安全 http://www.pandaguard.com 熊猫卫士
+国内安全 http://www.netguard.com.cn 网络卫士
+国内安全 http://www.netpower.com.cn/ 京中科网威信息技术有限公司
+国内安全 http://www.rising.com.cn/ 北京瑞星科技股份有限公司
+国内安全 http://www.is-one.net/ 安氏
+国内安全 http://www.chinahacker.net 龙派网络安全公司
+国内安全 http://www.flying2002.com 一位学生的网站 适合广大菜鸟 国内黑客 http://club.hackbbs.comsppshackersite
+国内黑客 http://www.sandflee.net 灰色轨迹
+国内黑客 http://www.netxeyes.com 小榕软件
+国内黑客 http://www.leothreads.com 网络技术论坛
+国内黑客 http://www.starkun.com 黑白网络
+国内黑客 http://www.cnhonker.net 中国红客联盟
+国内黑客 http://www.sometips.comAdam
+国内黑客 http://www.netslum.comNetSlum
+国内黑客 http://www.epeta.net 一位学生的网站
+国内黑客 http://www.sangel.net 安全天使
+国内黑客 http://www.nyfzns.net 诺亚方舟网络安全小组
+国内黑客 http://www.thysea.com 黑色海岸线
+国内黑客 http://www.3w3.org 网络最高安全指南
+国内黑客 http://www.fanqiang.com 永远的UNIX
+国内黑客 http://www.hacker.com.cn 黑客防线
+国内黑客 http://www.china4lert.org 红色警戒
+国内黑客 http://www.whitecell.orgWhitecellSecuritySystems 民间电脑技术原创组织，追求
+技术的精纯
+国内黑客 http://www.ttian.net 天天安全网(黑客工具)
+国内黑客 http://www.cnhacker.com 中国黑客联盟
+国内黑客 http://www.54hack.com 中国青年黑客联盟 一群可爱的年轻人的民间电脑技术组织
+国内黑客 http://www.hackerabc.com 红色联盟
+国内黑客 http://www.21cnhoc.com 可华黑客联盟
+国内黑客 http://www.hackart.org 黑客技术
+国内黑客 http://www.safen.org 劲风网络技术小组
+国内黑客 http://www.isforce.org 　网络力量
+国内黑客 http://www.realhack.org/ 中国新青年阵线
+国内黑客 http://landun.org 蓝盾联盟
+国内黑客 http://www.chinawill.com 中国鹰派 刺刀上带着思想
+国内黑客 http://www.chinasafe.net 中国安全在线
+国内黑客 http://www.dancefires.com 网络安全小组
+国内黑客 http://www.cnredmay.net 　五月安全网
+国内黑客 http://www.20nt.net20NT 网络安全组
+国内黑客 http://www.pediy.com 看雪学苑
+国内黑客 http://www.oldhand.orgoldhandorg
+国内黑客 http://www.chinahacker.com 中 国 黑 客 联 盟
+国内黑客 http://www.crackbest.net 白菜乐园
+国内黑客 http://www.driverdevelop.com/lu0/ 陆麟的主页
+
+国内电脑技术站点 http://www.linuxforum.net 中国Linux论坛 学术气氛浓重的Linux论坛
+国内电脑技术站点 http://www.linuxeden.com/Linux 伊甸园自由软件自由文档自由网站
+国内电脑技术站点 http://www.linuxaid.com.cn 北京朗新网络科技有限公司主办
+国内电脑技术站点 http://www.vbgood.comVB 爱好者乐园
+国内电脑技术站点 http://vchelp.net 与Visual C++开发相关的专业网站
+国内电脑技术站点 http://www.ccw.com.cn 计算机世界网
+国内电脑技术站点 http://www.ccidnet.com 赛迪网
+国内电脑技术站点 http://soft.winzheng.com 赢政天下-下载中心
+国内电脑技术站点 http://www.lslnet.com/linux/ 蓝森林
+国内电脑技术站点 http://www.itleague.org/IT 社团
+国内电脑技术站点 http://www.soft163.com163 软件园
+国内电脑技术站点 http://www.driverdevelop.com 驱动开发网
+国内电脑技术站点 http://www.csdn.net/ 中国最大的开发者网络

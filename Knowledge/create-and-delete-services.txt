@@ -1,0 +1,5 @@
+建服务
+SC create svn1.5 binPath= "\"C:\Program Files\Subversion\bin\svnserve.exe\" --service --root \"E:\SVNRoot\"" depend= Tcpip start= auto
+
+删服务
+sc delete [servicename]

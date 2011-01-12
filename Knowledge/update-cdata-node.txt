@@ -1,0 +1,11 @@
+node=xmlDoc.selectSingleNode("//正文");  
+node.firstChild.InnerText="这就是CDATA中的内容";
+
+
+ $doc   = new DOMDocument();
+  $doc->load($file);
+  $root = $doc->documentElement;
+  $cdata = $doc->createCDATASection($content);
+  $root->replaceChild($cdata, $root->firstChild);
+  $doc->save($file);
+

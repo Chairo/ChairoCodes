@@ -1,0 +1,74 @@
+相关软件下载地址:
+http://cn.php.net/get/php-5.2.6-Win32.zip/from/a/mirror
+http://dev.mysql.com/get/Downloads/MySQL-6.0/mysql-6.0.4-alpha-win32.zip/from/pick?done=ea11691f4869fa
+http://httpd.apache.org/download.cgi
+http://www.zend.com/en/products/guard/downloads
+http://www.phpmyadmin.net/home_page/downloads.php
+
+1.Apache 2.2.8安装一路Next 中间只需要选择下路径
+2.PHP 5.2.6安装
+1)解压php-5.2.6-Win32.zip
+2)Copy php.ini-dist文件到Windows目录下并改名为php.ini
+3)更改extension_dir = "./"为extension_dir = "D:/PHP/PHP/ext"
+4)应用一些php扩展：去掉下面扩展前的注释符号";"
+extension=php_mbstring.dll
+extension=php_mysql.dll
+extension=php_curl.dll
+extension=php_dbase.dll
+extension=php_gd2.dll
+extension=php_ldap.dll
+extension=php_zip.dll
+5)拷贝D:/PHP/php/libmysql.dll到C:/windows/system32下
+6)修改php.ini中session.save_path = “D:/php/tmp"
+7)修改php.ini中upload_tmp_dir = “D:/php/tmp"
+8)打开D:\PHP\apache\Apache2\conf\httpd.conf修改如下
+修改DocumentRoot DocumentRoot “E:/htdocs"
+修改DocumentRoot下的第一个Directory标记，同样将其指向php的运行目录
+修改DirectoryIndex(在打开文件夹时默认打开的文件，可以在后面手动添加)
+DirectoryIndex index.html index.html.var index.php index.htm
+文件最后加
+LoadFile D:/PHP/php/php5ts.dll
+LoadFile D:/PHP/php/libmysql.dll
+AddType application/x-httpd-php .php
+LoadModule php5_module "D:/PHP/php/php5apache2_2.dll"
+3.Mysql 6.0.4 alpha安装
+1)选择Custom Next
+2)选择安装目录 Next
+3)Install
+4)一路Next直到提示配置Mysql
+5)Next Next 选择Server Machine
+6)Next Next Next 选择Manual Setting连接数选择 300++
+7)Next Next 选择Manual Selected Default Caharacter Set/Collation 默认编码为gb2312 或者 GBK 或者UTF-8(推荐UTF-8)
+8)选上Include Bin Directory in Windows PATH
+9)设置Root密码,可以选择Modify Security Settings为空(去掉对勾)等装了phpmyadmin再设置
+
+4.安装phpMyAdmin 2.11.6
+1)解压phpMyAdmin-2.11.6-all-languages.tar.bz2到E:\htdocs\phpmyadmin
+2)复制libraries下config.default.php到phpmyadmin下,改名为config.inc.php
+3)修改$cfg['PmaAbsoluteUri'] = ";为$cfg['PmaAbsoluteUri'] = "http://localhost/phpmyadmin/";
+4)修改$cfg['Servers'][$i]['auth_type'] = ‘config’;为$cfg['Servers'][$i]['auth_type'] = "http";
+5.安装ZendOptimizer 3.3.3
+没什么太要注意的,选择目录(ZendOptimizer 3.3.3中间要选择一下Apache安装目录)一路Next搞定~
+
+PS:公司电脑换了一台,正好看到PHP和Mysql都有新版本出来,就顺便配了个新的环境.总体来说变化不大.Mysql5和6安装时候差不多.还没测试兼容性.等公司不忙了测试一下..
+
+安装xDebug
+   1. xDeBug是免费使用的,下载地址在:http://www.xdebug.org/
+   2. Origami在Windows下开发,所以选择Windows modules下对应PHP5.2.5版本的DLL:http://www.xdebug.org/link.php?url=xdebug202-52-win
+   3. 下载后改名:php_xdebug.dll
+   4. 复制到php安装文件夹的ext目录下
+   5. 打开c:\windows\下的php.ini,在最后加上
+   6.
+
+          extension=php_xdebug.dll
+          [Xdebug]
+          xdebug.profiler_enable=on
+          xdebug.trace_output_dir="E:\PHP\xdebug"
+          xdebug.profiler_output_dir="E:\PHP\xdebug"
+
+   7. 重启Apache,打开phpinfo()查找xdebug,如果能找到就说明安装成功.
+
+另外xdebug生成的log直接看的话很乱,很难看懂
+
+推荐用同样免费的wincachegrind工具来阅读xdebug生成的log
+wincachegrind下载地址:http://sourceforge.net/projects/wincachegrind/

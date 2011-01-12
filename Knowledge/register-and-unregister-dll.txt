@@ -1,0 +1,5 @@
+#register dll
+C:\WINDOWS\system32>regsvr32 /s ZipFile.dll
+
+#unregister dll
+C:\WINDOWS\system32>regsvr32 /u ZipFile.dll

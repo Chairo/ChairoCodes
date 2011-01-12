@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ubb-test</title>
+<script>
+var t = function(markup)
+{
+   var strEnd = markup.replace(/\[/ig, '[/');
+   if (strEnd.indexOf('=') > - 1)
+   {
+      strEnd = strEnd.replace(/(.*?)\=.*?\]/, '$1]');
+   }
+   if(document.selection && document.selection.type == "Text")
+   {
+      // IE, Opera
+      var oStr = document.selection.createRange();
+      oStr.text = markup + oStr.text + strEnd;
+   }
+   else if(window.getSelection && document.getElementById("textarea").selectionStart > - 1)
+   {
+      // Netscape
+      var st = document.getElementById("textarea").selectionStart;
+      var ed = document.getElementById("textarea").selectionEnd;
+      document.getElementById("textarea").value = document.getElementById("textarea").value.substring(0, st) + markup + document.getElementById("textarea").value.substring(st, ed) + strEnd + document.getElementById("textarea").value.slice(ed);
+   }
+   else
+   {
+      document.getElementById("textarea").value += markup + strEnd;
+   }
+};
+</script>
+</head>
+
+<body>
+<label>
+  <textarea name="textarea" id="textarea" cols="45" rows="5"></textarea>
+</label>
+<input type="submit" name="button" id="button" value="提交" onclick="t('[b]');" />
+
+</body>
+</html>

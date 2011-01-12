@@ -1,0 +1,29 @@
+1.使用mod_deflate压缩页面
+下边例子会压缩 html,xml,php,js,css后缀的文件
+在.htaccess中加入：
+
+    <ifmodule mod_deflate.c>
+    AddOutputFilter DEFLATE html xml php js css
+    </ifmodule>
+
+或者
+
+    <ifmodule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/xml application/x-httpd-php application/x-javascript text/css
+    </ifmodule>
+
+但是如果你的主机mod_deflate模块没有打开就可以退而求其次选择GZip压缩
+2.使用GZip压缩页面
+注意:这种办法会增加服务器内存消耗.并且要zlib库支持(一般都会开启)且要求PHP版本>4.0.4
+使用ob_gzhandler函数的3种方法进行压缩：
+
+    1)在php.ini中设置output_handler = ob_gzhandler
+    2)在.htaccess中加入php_value output_handler ob_gzhandler
+    3)在php文件头加上ob_start('ob_gzhandler');
+
+这里详细介绍第三种办法
+
+    首先需要把css或者js文件后边加上后缀.php
+    然后在文件的首行加入<?PHP If(Extension_Loaded('zlib')){Ob_Start('ob_gzhandler');}Header("Content-type: text/css");?>(js文件对应Content-type: text/javascript)
+    最后在文件的末行加入<?PHP If(Extension_Loaded('zlib')){Ob_End_Flush();}?>
+    对应的引用这个css或者js的时候需要改一下文件的名字,后缀加.php

@@ -1,0 +1,47 @@
+复制当前编辑文件的路径
+    如果你要把当前文件作其他处理，需要这个文件的路径，这个功能可以不用再去敲路径
+    点右键
+    copy file path/name
+
+UE的function列表功能
+    打开一个程序文件，比如*.js
+    确保view/view as(*)/Javascript
+    选择view/(view/lists)/function list.也可以用F8
+
+加入当前时间
+    有时候写代码要注释，比如那天改的，按一下F7试试。
+
+打开文件内容中的文件
+    如果文件的内容里面有
+    "c:\test.txt" 或者"http://www.test.com/js/test.js"
+    这样的内容
+    你可以把鼠标定位到上面，点右键。弹出的菜单最上边会多个选项
+    "c:\test.txt" 或者"http://www.test.com/.../test.js"
+    点击它，打开相应文件
+
+
+调整，添加语法高亮显示
+    advanced/configuration/syntax Highlighting 点击下边的full path name for word list后边的open
+    打开的文件如：d:\Program Files\UltraEdit\WORDFILE.TXT
+    就是UE语法高亮显示的配置文件
+    /L1"C/C++" 就是第一种语言，/L2就是第二种。/C1对应高亮的颜色,里边的关键字可以自己定义.
+    用的时候，下载相应的word file,复制出来，粘贴到d:\Program Files\UltraEdit\WORDFILE.TXT，注意修改刚开始的/L1和你现有系统匹配。
+    好像对xml.xsl的显示不是很好，不够准确
+
+内置的多个剪贴板
+    你点右键可以看到
+    clipboards，里面内置了10个剪贴板。按说windows的copy只能复制一个内容。如果你要复制多个内容，跟据不 同的情况进行粘贴
+    这10个剪贴板，应该够你用了。
+    ctrl+0-9的数字键，是在剪贴板之间切换。比如
+    ctrl+1,然后copy了内容"a"
+    ctrl+2,然后copy了内容"b"
+    你如果想paste a，就要先按1下ctrl+1再ctrl+v,要paste b，就按一下ctrl+2再ctrl+v
+    我有时候不小心更换了剪贴板，就奇怪从别的地方复制的东西粘贴不过来。这种情况要注意
+
+如何删除空行?
+    查找 ^p$ 然后替换为空即可．
+
+即使是打开小文件也有迟延?
+    这是我遇到过的问题．每次打开文件的时候总有几秒钟的耽搁．我的机器性能可不算差．怎么回事?
+    网络打印机搞得鬼! 打开"高级"->"设置"->"编辑器"->"高级",看看是不是选中了"载入/恢复打印机设置"?
+    如果是的话，去掉(不同的版本/汉化与否可能该位置所在有差别)．

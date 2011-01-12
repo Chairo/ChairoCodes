@@ -1,0 +1,156 @@
+但这些xml数据带有命名空间(xmlns)
+
+附相关代码:
+
+    using System;
+    using System.Data;
+    using System.Configuration;
+    using System.Web;
+    using System.Web.Security;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
+    using System.Web.UI.WebControls.WebParts;
+    using System.Web.UI.HtmlControls;
+    using System.Xml;
+    using System.IO;
+
+    namespace webservice
+    {
+        public class verify
+        {
+            private string result = "";
+            private XmlDocument xmlDoc;
+            public string GetChinaHRXml(string inputXml)
+            {
+                string ATSLinkIDs = "";
+                string finallyXml = "";
+                LoadXML(ref xmlDoc, inputXml);
+                XmlNamespaceManager namespaceManager = new XmlNamespaceManager(xmlDoc.NameTable);
+                namespaceManager.AddNamespace("aa", "命名空间URL(即xmlns=后边的url)");
+                XmlElement node = (XmlElement)xmlDoc.SelectSingleNode("/aa:Query/aa:QueryCondition/aa:QueryJob", namespaceManager);
+                if (node != null)
+                {
+                    ATSLinkIDs = node.InnerText;
+                    node = null;
+                }
+                xmlDoc.SelectSingleNode("/aa:Query/aa:QueryCondition/aa:QueryJob", namespaceManager).InnerText = "";
+                finallyXml = xmlDoc.OuterXml;
+                xmlDoc = null;
+                return finallyXml;
+            }
+            public void LoadXML(ref XmlDocument ixmlDoc, string strXML)
+            {
+                ixmlDoc = new XmlDocument();
+                ixmlDoc.LoadXml(strXML);
+            }
+        }
+    }
+
+仅有一个获取值的例子,其他修改或者删除参考下边这个转载的没有操作命名空间的xml的代码
+
+    using System;
+    using System.Data;
+    using System.Configuration;
+    using System.Web;
+    using System.Web.Security;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
+    using System.Web.UI.WebControls.WebParts;
+    using System.Web.UI.HtmlControls;
+    using System.Xml;
+    using System.IO;
+
+    private XmlDocument xmlDoc;
+            //load xml file
+            private void LoadXml()
+            {
+                xmlDoc=new XmlDocument();
+                xmlDoc.Load(Server.MapPath("User.xml"));
+            }
+
+            //添加节点
+            private void AddElement()
+            {
+                LoadXml();
+                XmlNode xmldocSelect=xmlDoc.SelectSingleNode("user");
+                XmlElement el=xmlDoc.CreateElement("person"); //添加person节点
+                el.SetAttribute("name","风云"); //添加person节点的属性"name"
+                el.SetAttribute("sex","女");   //添加person节点的属性 "sex"
+                el.SetAttribute("age","25");   //添加person节点的属性 "age"
+                 XmlElement xesub1=xmlDoc.CreateElement("pass"); //添加person节点的里的节点
+                 xesub1.InnerText="123";//设置文本节点
+                 el.AppendChild(xesub1);
+                 XmlElement xesub2=xmlDoc.CreateElement("Address");
+                 xesub2.InnerText="昆明";//设置文本节点
+                 el.AppendChild(xesub2);
+                xmldocSelect.AppendChild(el);
+                xmlDoc.Save(Server.MapPath("user.xml"));
+            }
+
+            //修改节点
+            private void UpdateElement()
+            {
+                LoadXml();
+                XmlNodeList nodeList=xmlDoc.SelectSingleNode("user").ChildNodes;//获取bookstore节点的所有子节点
+                foreach(XmlNode xn in nodeList)//遍历所有子节点
+                {
+                    XmlElement xe=(XmlElement)xn;//将子节点类型转换为XmlElement类型
+                    if(xe.GetAttribute("name")=="风云")//如果name属性值为“风云”
+                    {
+                        xe.SetAttribute("name","发明");
+                        //如果下面有子节点在下走
+                         XmlNodeList nls=xe.ChildNodes;//继续获取xe子节点的所有子节点
+                        foreach(XmlNode xn1 in nls)//遍历
+                        {
+                           XmlElement xe2=(XmlElement)xn1;//转换类型
+                            if(xe2.Name=="pass")//如果找到
+                            {
+                                xe2.InnerText="66666";//则修改
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+               xmlDoc.Save(Server.MapPath("user.xml"));//保存
+            }
+
+            //删出节点
+            private void deleteNode()
+            {
+                LoadXml();
+                XmlNodeList xnl=xmlDoc.SelectSingleNode("user").ChildNodes;
+                foreach(XmlNode xn in xnl)
+                {
+                    XmlElement xe=(XmlElement)xn;
+
+                    if(xe.GetAttribute("name")=="发明")
+                    {
+                        //xe.RemoveAttribute("name");//删除name属性
+                       // xe.RemoveAll();//删除该节点的全部内容
+                        xe.ParentNode.RemoveChild(xe);
+
+                        break;
+                    }
+                }
+                xmlDoc.Save(Server.MapPath("user.xml"));//保存
+            }
+
+            private void showIt()
+            {
+                LoadXml();
+                XmlNode xn=xmlDoc.SelectSingleNode("user");
+                XmlNodeList xnl=xn.ChildNodes;
+                foreach(XmlNode xnf in xnl)
+                {
+                    XmlElement xe=(XmlElement)xnf;
+    //                Console.WriteLine(xe.GetAttribute("name"));//显示属性值
+    //                Console.WriteLine(xe.GetAttribute("sex"));
+    //
+    //                XmlNodeList xnf1=xe.ChildNodes;
+    //                foreach(XmlNode xn2 in xnf1)
+    //                {
+    //                    Console.WriteLine(xn2.InnerText);//显示子节点点文本
+    //                }
+                }
+            }

@@ -1,0 +1,7 @@
+yellow-fade.txt    类似黄褪效果
+get-div-height-make-2divs-height-equal.txt    获得DIV高度并两个DIV高度自适应
+arguments-use.html    arguments获得函数的实参
+onmouseover-display.html    鼠标移到上边显示菜单
+ubb-test.html    ubb代码
+javascripts.rar    拖放,移动,半透明,缩放等特效
+apply-call.txt    apply和call的用法

@@ -1,0 +1,13 @@
+    <script type="text/javascript">
+    <!--
+    var   a=document.getElementById("left");
+    var   b=document.getElementById("right");
+    if(a.scrollHeight<b.scrollHeight)
+    {
+    a.style.height=b.scrollHeight+"px";
+    }
+    else{
+    b.style.height=a.scrollHeight+"px";
+    }
+    -->
+    </script>

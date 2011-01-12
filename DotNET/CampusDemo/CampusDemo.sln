@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampusDemo", "CampusDemo\CampusDemo.csproj", "{37705FB7-D370-4CF7-9735-798B612E538A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLL", "DLL", "{4256B437-296C-400C-ADB2-F3C9F8A11C6D}"
+	ProjectSection(SolutionItems) = preProject
+		DLL\log4net.dll = DLL\log4net.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampuSys.Core", "CampuSys.Core\CampuSys.Core.csproj", "{23A4FB23-0615-4306-89FD-6CB475B74C83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampuSys.BO", "CampuSys.BO\CampuSys.BO.csproj", "{F214A85F-E7F3-43DB-A388-8695409063D6}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 4
+		SccProjectUniqueName0 = CampuSys.Core\\CampuSys.Core.csproj
+		SccLocalPath0 = .
+		SccProjectFilePathRelativizedFromConnection0 = CampuSys.Core\\
+		SccProjectUniqueName1 = CampuSys.BO\\CampuSys.BO.csproj
+		SccLocalPath1 = .
+		SccProjectFilePathRelativizedFromConnection1 = CampuSys.BO\\
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = CampusDemo\\CampusDemo.csproj
+		SccLocalPath3 = .
+		SccProjectFilePathRelativizedFromConnection3 = CampusDemo\\
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37705FB7-D370-4CF7-9735-798B612E538A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37705FB7-D370-4CF7-9735-798B612E538A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37705FB7-D370-4CF7-9735-798B612E538A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37705FB7-D370-4CF7-9735-798B612E538A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23A4FB23-0615-4306-89FD-6CB475B74C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23A4FB23-0615-4306-89FD-6CB475B74C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23A4FB23-0615-4306-89FD-6CB475B74C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23A4FB23-0615-4306-89FD-6CB475B74C83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F214A85F-E7F3-43DB-A388-8695409063D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F214A85F-E7F3-43DB-A388-8695409063D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F214A85F-E7F3-43DB-A388-8695409063D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F214A85F-E7F3-43DB-A388-8695409063D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

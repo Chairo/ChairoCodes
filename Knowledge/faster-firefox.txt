@@ -1,0 +1,18 @@
+    1、在地址栏输入“about:config”， 将打开一个参数命令行的详细列表。
+
+    2、在下面的列表中，找到“network.http.pipelining”， 然后双击“network.http.pipelining”将其值改成“true”。
+
+    3、找到“network.http.pipelining.maxrequests”并把它的值改的高一些，如改成30，意思就是每次发送30个请求。
+
+    4、在Firefox任何一个地方点右键，选择“新建”—“整数”在弹出的对话框中，输入“nglayout.initialpaint.delay”并将其值改为“0”，表示当浏览器收到网站回复的信息后能够快速的反应。
+
+about:config
+browser.link.open_newwindow.restriction
+0. 强制所有 JavaScript 控制的弹出窗口打开于新建标签页
+1. 全部在新窗口打开（行为类似IE）
+2. 已调整大小的在新窗口打开
+
+about:config”
+在Config列表中点击右键，选择“新建→字符串”
+在弹出的“新的字符串值”对话框“首选项名称”中输入 “browser.cache.disk.parent_directory”确定
+在下个窗口中输入字符串的值，即新的文件路径

@@ -1,0 +1,17 @@
+ public void CreateExcel(DataSet ds, string FileName)
+        {
+            Response.Clear();
+            Response.Charset = "utf-8";
+            Response.ContentEncoding = System.Text.Encoding.GetEncoding("utf-8");
+            Response.ContentType = "text/csv";
+            Response.AppendHeader("Content-Disposition", "attachment;filename=" + FileName + ".xls");
+            System.IO.StringWriter oSW = new System.IO.StringWriter();
+            HtmlTextWriter oHW = new HtmlTextWriter(oSW);
+            DataGrid dg = new DataGrid();
+            dg.DataSource = ds.Tables[0];
+            dg.DataBind();
+            dg.RenderControl(oHW);
+            Response.Write(oSW.ToString());
+            Response.Flush();
+            Response.Close();
+        }

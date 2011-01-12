@@ -1,0 +1,20 @@
+    <script>
+    i=1
+    var autourl=new Array()
+    autourl[1]="http://www.qx5.cn"  //网通地址
+    autourl[2]="http://www.google.com" //电信地址
+    function auto(url){
+     if(i){
+      i=0;top.location=URL //这里就是跳转镜像站了
+     }
+    }
+    function run(){
+     for(var i=1;i<autourl.length;i++)
+     document.write("<img src="+autourl[i]+" width=1 height=1 onerror=auto('"+autourl[i]+"')>") //用镜像站url做图片的地址,图片加载肯定会错误,但图片如果能正常加载说明你可以访问到这个镜像站,加载错误的处理就是跳转了
+    }
+    run()
+    </script>
+
+但是这个代码有个问题就是不能识别真正速度最快的镜像...
+
+因为它只是判断了图片可否加载(也就是镜像站可否比较快速访问到),真正所有镜像的时间差没有比较,这个代码只是跳到一个比较快的镜像地址,而不是最快的镜像地址

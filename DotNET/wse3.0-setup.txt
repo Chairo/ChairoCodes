@@ -1,0 +1,7 @@
+下载地址:http://download.microsoft.com/download/5/5/1/5511bfc6-e52f-4db0-bafb-fd5dcb91eff0/Microsoft%20WSE%203.0.msi
+安装wse3.0时候需要选择"Visual Studio安装模式 ",第一次Origami选择了默认的Runtime模式结果不能设置wse...
+打开一个WebServices项目在项目名字上点右键最下边有一个wse setting 3.0的选项
+详细设置WSE
+http://www.cnblogs.com/jiekeng/archive/2006/10/25/539962.html
+图文教程设置WSE
+http://blog.csdn.net/luck0235/archive/2007/06/07/1642621.aspx

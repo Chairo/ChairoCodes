@@ -1,0 +1,6 @@
+<SPAN id=ad_01>ÀàËÆ»ÆÍÊĞ§¹û...</SPAN>
+<SPAN class=spanclass id=span_ad_01>
+<script src='http://s50.cnzz.com/stat.php?id=245306&web_id=245306' language='JavaScript' charset='gb2312'></script>
+</SPAN>
+<SCRIPT>ad_01.innerHTML=span_ad_01.innerHTML;
+span_ad_01.innerHTML="";</SCRIPT>

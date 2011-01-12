@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"> 
+<html> 
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script language="JavaScript"> 
+<!-- 
+/** 
+ * 演示arguments的用法,如何获取实参数和形数数 
+ */ 
+ function argTest(a,b,c,d){ 
+	 var numargs = arguments.length; 
+	 // 获取被传递参数的数值。 
+	 var expargs = argTest.length; 
+	 // 获取期望参数的数值。 
+	 alert("实参数目为:"+numargs); 
+	 alert("形数数目为:"+expargs);
+	 alert(arguments[0]);
+	 alert(argTest[0]); //undefined 没有这种用法 
+ } 
+ /** 
+  * 下面调用分别打印： 
+  * "实参数目为:2" 
+  * "形数数目为:4" 
+  * "1" 
+  * "undefined" 
+  */ 
+  argTest(1,2);
+
+  /** 
+   * 下面调用分别打印： 
+   * "实参数目为:5" 
+   * "形数数目为:4" 
+   * "1" 
+   * "undefined" 
+   */ 
+   //argTest(1,2,3,4,5) 
+//--> 
+</script> 
+</head> 
+<body></body>
+</html>

@@ -1,0 +1,8 @@
+create-storage-process.sql    创建存储过程例子
+use-cursor-cycle-data.sql    用游标循环数据
+while-cycle-insert-into-table.sql    While函数循环插入数据到表中
+update-table-by-select.sql    从一个SELECT语句中更新数据
+use-exist-instead-in.sql    用Exist取代in查询
+ip2number&number2ip.sql    IP和数字之间相互转换
+refresh-index.sql    更新索引
+convert-datetime-to-nvarchar.sql    日期类型转换成字符串

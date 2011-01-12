@@ -1,0 +1,58 @@
+准备工作
+必须先在.cs文件顶部引入命名空间：
+using System.Data ;
+using System.Data.SqlClient;
+DataReader
+作用：DataReader阅读类，执行数据的“只向前”的读取。
+问：什么是DataReader？
+答：ADO.NET DataReader对象可以从数据库中检索只读、只进的数据流。因为每次在内存中的数据只有一行，所以使用DataReader可提高应用程序的性能并减少系统开销。它还提供了未缓冲的数据流，该数据流使过程逻辑可以有效地按顺序处理从数据源中返回的结果。由于数据不在内存中缓存，所以在检索大量数据时，DataReader是一种合适的选择。
+
+    string strConn="uid=账号;pwd=密码;database=数据库;server=服务器";//SQL Server链接字符串
+    SqlConnection ConnSql=new SqlConnection (strConn); //Sql链接类的实例化
+    ConnSql.Open ();//打开数据库
+    string strSQL="Select * FROM 表名1";//SQL语句
+    SqlCommand cmd = new SqlCommand(strSQL,ConnSql);//创建Command命令对象
+    SqlDataReader dr=cmd.ExecuteReader();//创建DataReader对象，并调用ExecuteReader从数据源检索行
+    dr.Read();//启动阅读器的Read方法，返回行的每一列
+    //..数据读取,格式为 dr["列名"]
+    dr.Close();//关闭阅读器
+    ConnSql.Close();//关闭数据库
+
+DataSet
+作用：DataSet，DataAdapter读取数据。
+
+
+    string strConn="uid=账号;pwd=密码;database=数据库;server=服务器";//SQL Server链接字符串
+    SqlConnection ConnSql=new SqlConnection (strConn); //Sql链接类的实例化
+    ConnSql.Open ();//打开数据库
+    string strSQL="Select * FROM 表名1 "; //要执行的SQL语句
+    SqlDataAdapter da=new SqlDataAdapter(strSQL,ConnSql); //创建DataAdapter数据适配器实例
+    DataSet ds=new DataSet();//创建DataSet实例
+    da.Fill(ds,"自定义虚拟表名");//使用DataAdapter的Fill方法(填充)，调用Select命令
+    ConnSql.Close ();//关闭数据库
+
+ExecuteNonQuery
+作用：利用ExecuteNonQuery，执行数据的插入、更新、删除。
+问：什么是ExecuteNonQuery？
+答：在ADO.NET中，ExecuteNonQuery方法用于执行不需要返回结果的命令，如插入、删除和更新等操作。
+
+    string strConn="uid=账号;pwd=密码;database=数据库;server=服务器";//SQL Server链接字符串
+    SqlConnection ConnSql=new SqlConnection (strConn); //Sql链接类的实例化
+    ConnSql.Open ();//打开数据库
+    string strSQL="Insert INTO 表名1、Update 表名1 SET、Delete FROM 表名1";//插入、更新、删除的SQL语句
+    SqlCommand cmd=new SqlCommand (strSQL,ConnSql);//创建Command命令对象
+    cmd.ExecuteNonQuery();//执行命令
+    ConnSql.Close ();//关闭数据库
+
+ExecuteScalar
+作用：利用ExecuteScalar统计数据。
+问：什么是ExecuteScalar？
+答：ExecuteScalar方法可以返回单个值，如求和、总行数等SQL语句的聚合函数。
+
+    string strConn="uid=账号;pwd=密码;database=数据库;server=服务器";//SQL Server链接字符串
+    SqlConnection ConnSql=new SqlConnection (strConn); //Sql链接类的实例化
+    ConnSql.Open ();//打开数据库
+    string strSQL="Select COUNT(*) FROM 表名1";//SQL统计,SUM等等
+    SqlCommand cmd = new SqlCommand(strSQL,ConnSql);//创建Command命令对象
+    int intNum=(int)cmd.ExecuteScalar();//得到统计数,SUM则用double
+    ConnSql.Close();//关闭数据库

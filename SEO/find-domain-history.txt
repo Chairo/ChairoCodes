@@ -1,0 +1,7 @@
+http://domain-history.domaintools.com/可以输入域名查看域名历史(不十分准确.但可以参考)
+
+查询whois信息 很多域名注册都可以查看
+
+查看域名删除记录,如果短时间删除而且搜索引擎没有记录就要小心了
+
+http://web.archive.org/web/*/http://abc.com 这查找域名历史
