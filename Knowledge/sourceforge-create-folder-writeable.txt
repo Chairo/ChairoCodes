@@ -22,6 +22,7 @@ rsync -avP -e ssh ./ XXX,XXXX@web.sourceforge.net:htdocs/
 2，mv uploads /home/persistent/h/he/项目名/ 把uploads转移到persistent下面
 3， ln -s /home/persistent/h/he/项目名/uploads 软连接过来
 4，chmod 777 /home/persistent/h/he/项目名/uploads 设置好权限
-5，如果成功了，执行：ll，会列出一个uploads -> /home/persistent/h/he/项目名/uploads/ ，证明在网站目录的uploads文件夹已经映射到persistent里面，可以写入了。
+5，如果成功了，执行：ll，会列出一个uploads -> /home/persistent/h/he/项目名/uploads/
+证明在网站目录的uploads文件夹已经映射到persistent里面，可以写入了。
 
 要处理多个文件和文件夹，依此设置。
