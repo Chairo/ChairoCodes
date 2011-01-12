@@ -1,0 +1,27 @@
+-t chairopenn,resumes@shell.sourceforge.net create
+
+成功申请好空间后，可以使用sftp传文件，也可以在sf网站里面传，但是要解压，改权限什么的操作还是要用ssh。
+
+随便找一个linux或者ssh下面执行：
+ssh -t 帐户名,工程名@shell.sourceforge.net create
+创建你的临时ssh帐户。
+
+用ssh登录shell.sourceforge.net，直接就可以登录了，不用像网上的教材说的产生密匙。用户名是：你的帐户名,工程名
+
+其中：
+/home/groups/X/XX/XXXX/htdocs/ 是你的网站目录
+/home/frs/project/X/XX/XXXX/ 是你在sf网站上传文件所在目录
+
+这样就好办了吧，unzip命令解压zip包，mv拷贝一下。
+同步命令，可以：
+rsync -avP -e ssh ./ XXX,XXXX@web.sourceforge.net:htdocs/
+
+下面说网站目录文件夹权限问题，不可以直接改成写入的777权限的，需要做以下工作：
+比如要把：/home/groups/h/he/项目名/htdocs/wp-content/uploads 文件夹设置写入权限
+1，cd /home/groups/h/he/项目名/htdocs/wp-content/ 进入目录
+2，mv uploads /home/persistent/h/he/项目名/ 把uploads转移到persistent下面
+3， ln -s /home/persistent/h/he/项目名/uploads 软连接过来
+4，chmod 777 /home/persistent/h/he/项目名/uploads 设置好权限
+5，如果成功了，执行：ll，会列出一个uploads -> /home/persistent/h/he/项目名/uploads/ ，证明在网站目录的uploads文件夹已经映射到persistent里面，可以写入了。
+
+要处理多个文件和文件夹，依此设置。
