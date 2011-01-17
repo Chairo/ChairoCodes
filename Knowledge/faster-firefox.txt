@@ -1,18 +1,22 @@
-    1、在地址栏输入“about:config”， 将打开一个参数命令行的详细列表。
-
-    2、在下面的列表中，找到“network.http.pipelining”， 然后双击“network.http.pipelining”将其值改成“true”。
-
-    3、找到“network.http.pipelining.maxrequests”并把它的值改的高一些，如改成30，意思就是每次发送30个请求。
-
-    4、在Firefox任何一个地方点右键，选择“新建”—“整数”在弹出的对话框中，输入“nglayout.initialpaint.delay”并将其值改为“0”，表示当浏览器收到网站回复的信息后能够快速的反应。
-
-about:config
+在地址栏输入about:config
+在Filter（地址栏）中输入network.http.pipelining，双击赋值为true，默认为false
+在Filter中输入network.http.pipelining.maxrequests，双击并赋值为8，默认键值为4
+在Filter中输入network.http.proxy.pipelining，双击并赋值为true
+在Filter中输入network.dns.disableIPv6，双击并赋值为true
+右键新建Boolean值，键名为content.interrupt.parsing，赋值true
+右键新建Integer值，键名为content.max.tokenizing.time，赋值2250000
+右键新建Integer值，键名为content.notify.interval，赋值750000
+右键新建Boolean值，键名为content.notify.ontimer，赋值true
+右键新建Integer值，键名为content.notify.backoffcount，赋值5
+右键新建Integer值，键名为content.switch.threshold，赋值750000
+右键新建Integer值，键名为nglayout.initialpaint.delay，赋值0
+添加布尔值名为config.trim_on_minimize设置为true
+ipc 相关都设置为false
+browser.cache.disk.parent_directory / browser.cache.offline.parent_directory 修改到ram盘
+在过滤器中输入browser.urlbar.clickSelectsAll [布尔值]这个参数赋值true是高亮选中，false是插入光标。
+创建一个browser.cache.memory.capacity（整数）设置firefox使用多少内存来进行缓存，默认值-1基于系统内存自动设置，18432=18MB一般适用于512M~1G内存。这个设置大家看着办吧。
+browser.cache.memory.enable [布尔值]该项和browser.cache.memory.capacity联合起作用。如果设置为true，firefox将使用 browser.cache.memory.capacity指定的内存大小来进行缓存
 browser.link.open_newwindow.restriction
 0. 强制所有 JavaScript 控制的弹出窗口打开于新建标签页
 1. 全部在新窗口打开（行为类似IE）
 2. 已调整大小的在新窗口打开
-
-about:config”
-在Config列表中点击右键，选择“新建→字符串”
-在弹出的“新的字符串值”对话框“首选项名称”中输入 “browser.cache.disk.parent_directory”确定
-在下个窗口中输入字符串的值，即新的文件路径
