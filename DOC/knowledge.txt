@@ -21,3 +21,4 @@ update-cdata-node.txt    更新XML的CDATA节点方法
 create-and-delete-services.txt    新建/删除服务
 Log4Net使用指南.mht    Log4Net.dll说明
 nginx-load-balancing.txt    nginx做负载均衡
+firefox-delete-history.txt    如何删除firefox单条浏览记录
