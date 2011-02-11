@@ -1,0 +1,53 @@
+Twig教程（一）：
+<a href="http://www.twig-project.org/">Twig</a>是一个快速、安全、灵活的PHP模板引擎。Twig本身是开源的，由<a href="http://fabien.potencier.org/">Fabien Potencier</a>开发维护，基于BSD协议，Twig的源代码<a href="http://github.com/fabpot/twig/">托管在Github</a>上，Twig也有一个基于Subversion的镜像站点（每十五分钟自动更新一次）http://svn.twig-project.org/。
+
+Twig将模板编译成经过优化的原始PHP代码，所以Twig是一个快速的模板引擎。并且Twig有一套沙盘机制，用来检测不安全的代码。Twig同样支持开发者灵活的自定义标签、过滤器等。
+
+Twig的模板示例：
+{{ var }} {# 输出一个变量 #}
+{{ var|e }}
+{% for user in users %}
+  用户名： {{ user.name }}
+{% else %}
+  无符合条件数据
+{% endfor %}
+
+由上例可以看出Twig是完全面向对象的，并且语法非常简单、灵活。
+
+现在很多IDE都支持语法高亮和自动完成等，Twig语法类似Jinja 和 Django模板（Python），所以支持Jinja 和 Django语法高亮及自动完成的IDE均可以很好的支持Twig。Twig官方推荐TextMate下的<a href="http://jinja.pocoo.org/2/documentation/integration/">Jinja</a> bundle 或者 <a href="http://code.djangoproject.com/wiki/TextMate/">Django</a>，或者使用VIM的插件<a href="http://jinja.pocoo.org/2/documentation/integration/">Jinja 语法插件</a>。
+
+
+Twig教程（二）：
+Twig下载地址：
+http://github.com/fabpot/Twig/tarball/master （tar格式）
+http://github.com/fabpot/Twig/zipball/master （zip格式）
+
+Twig使用非常简单，新建一个php文件，输入如下代码：
+&lt;?php
+require_once '/path/to/lib/Twig/Autoloader.php';
+Twig_Autoloader::register();
+
+$loader = new Twig_Loader_Filesystem('/path/to/templates');
+$twig = new Twig_Environment($loader, array(
+  'cache' => '/path/to/compilation_cache',
+));
+$template = $twig->loadTemplate('index.twig');    //index.twig放在/path/to/templates目录下，内容为任意内容
+$template->display();
+
+?&gt;
+
+在浏览器中访问此php页面即可看到浏览器中显示了index.twig中内容。
+
+Twig均继承自基类environment，此基类的实例实现了Twig的配置、扩展、加载Twig模板文件等功能。大部分Twig程序中初始化时候均创建了一个Twig_Environment对象来加载Twig的配置、模板等。
+
+
+
+
+
+
+
+
+
+
+
+lexer 语法分析器
