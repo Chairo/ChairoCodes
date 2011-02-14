@@ -19,8 +19,8 @@ Twig的模板示例：
 
 Twig教程（二）：
 Twig下载地址：
-http://github.com/fabpot/Twig/tarball/master （tar格式）
-http://github.com/fabpot/Twig/zipball/master （zip格式）
+<a href="http://github.com/fabpot/Twig/tarball/master">http://github.com/fabpot/Twig/tarball/master</a> （tar格式）
+<a href="http://github.com/fabpot/Twig/zipball/master">http://github.com/fabpot/Twig/zipball/master</a> （zip格式）
 
 Twig使用非常简单，新建一个php文件，输入如下代码：
 &lt;?php
@@ -38,13 +38,38 @@ $template->display();
 
 在浏览器中访问此php页面即可看到浏览器中显示了index.twig中内容。
 
-Twig均继承自基类environment，此基类的实例实现了Twig的配置、扩展、加载Twig模板文件等功能。大部分Twig程序中初始化时候均创建了一个Twig_Environment对象来加载Twig的配置、模板等。
+Twig均继承自基类environment，此基类的实例实现了Twig的配置、扩展、加载Twig模板文件等功能。大部分Twig程序中初始化时候均实例化了一个Twig_Environment对象来加载Twig的配置、模板等。
+
+注：Twig的模板目录可以是一个也可以是多个，可以用$loader = new Twig_Loader_Filesystem($templateDir);或者$loader = new Twig_Loader_Filesystem(array($templateDir1, $templateDir2));来加载一个或者多个目录做为Twig的模板保存目录，其中多个模板目录时候Twig加载模板时候如果在$templateDir1没有找到对应的模板会自动去$templateDir2中寻找。
+
+Twig教程（三）：
+为了方便调用Twig，咱们来包装下Twig：
+&lt;?php
+require_once 'Twig/Autoloader.php';
+class Template {
+    public $t;
+    public function __construct(IncConfig $config) {
+        Twig_Autoloader::register();
+        $loader = new Twig_Loader_Filesystem($config-&gt;template_dir);
+        $this-&gt;t = new Twig_Environment($loader, array(
+                                                 'cache' =&gt; $config-&gt;compile_dir,
+                                                 'auto_reload' =&gt; true));
+        $lexer = new Twig_Lexer($this-&gt;t, array(
+            'tag_comment'  =&gt; array('{#', '#}'),    //注释
+            'tag_block'    =&gt; array('{%', '%}'),    //tag
+            'tag_variable' =&gt; array('{{', '}}'),    //变量
+        ));
+        $this-&gt;t-&gt;setLexer($lexer);
+        return $this-&gt;t;
+    }
+}
+?&gt;
+
+这样每次实例化Twig的时候只要创建一个Template的实例，并将Twig的配置信息作为参数传给咱们包装好的Template类即可
+注：IncConfig类源文件可以在<a href="http://chairo.free.fr/config.zip">这里</a>下载到
 
 
-
-
-
-
+Twig教程（四）：
 
 
 
