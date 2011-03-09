@@ -1,0 +1,40 @@
+一、安装imap模块
+
+1、安装imap模块前需要先安装imap所需的库：
+
+CentOS ：yum install libc-client-devel
+
+Debian：apt-get install libc-client-dev
+
+2、首先进入php安装目录的ext目录
+
+比如php的安装目录为：/root/lnmp0.4-full/php-5.2.10/
+
+则执行：cd /root/lnmp0.4-full/php-5.2.10/ext/
+
+我们要安装imap模块，执行cd imap/
+
+再执行 /usr/local/php/bin/phpize 会返回如下信息：
+Configuring for:
+PHP Api Version:         20041225
+Zend Module Api No:      20060613
+Zend Extension Api No:   220060519
+
+再执行以下命令：
+
+[root@vpser imap]# ./configure --with-php-config=/usr/local/php/bin/php-config
+
+[root@vpser imap]# make && make install
+
+执行完返回：
+
+Build complete.
+Don't forget to run 'make test'.
+
+Installing shared extensions:     /usr/local/php/lib/php/extensions/no-debug-non-zts-20060613/
+
+表示已经成功，再修改/usr/local/php/etc/php.ini
+
+查找：extension = 再最后一个extension= 后面添加上extension = "imap.so"
+
+保存，执行/root/lnmp restart 重启。

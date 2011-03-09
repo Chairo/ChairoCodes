@@ -1,0 +1,39 @@
+安装就不说明了, 当你装完lnmp. 运行：/pureftpd.sh 就自动安装pureftpd了.需要注意就是,你要安装unzip,我之前安装失败,就是因为没有unzip.安装unzip命令是: yum install unzip
+主要说说面板,其实挺简单的,一步一步来.
+
+首先输入 http://你的域名或IP/ftp/install.php
+
+第一步:检查文件
+全部ok.可以下一步了
+第二步:选第一个,创建一个新数据库
+第三步:输入mysql信息,全部显示ok.证明你的mysql没错.
+继续,都是输入mysql信息,和一个mysql数据库
+第四步:这个是配置文件,language哪里选择chinese, ftp address 填写你自己vps的ip信息.其他默认.然后记得 save保存.
+第五步:设置管理员密码(默认的密码我不太清楚),输入新的密码,然后按change.
+第六步:到了第六步了,把这些灰色的文字复制下来, 覆盖掉/usr/local/pureftpd/pureftpd-mysql.conf 这个文件.
+第七步:搞定了.安装完毕.
+
+就在右上角新增账号.
+账号填写aaa.
+密码自己填写
+uid,gid 都选www
+主目录选择 /home/root/
+
+安装后最好 运行一次命令:/root/pureftpd restart 因为我新建了一个用户,按保存,不能登陆ftp.后来我试试重新启动,就好了.嘎嘎
+
+还有,如果vps挂了或者重启了, ftp就没了,就要登录ssh 运行:/root/pureftpd start
+话说,怎么自启动这个啊?.
+
+****************************
+
+Debian执行如下命令加入开机启动：
+
+cat >/etc/init.d/pureftpd.sh<<eof
+/root/pureftpd start
+eof
+
+update-rc.d pureftpd.sh defaults
+
+CentOS 执行如下命令加入开机启动：
+
+编辑/etc/rc.d/rc.local 在文件末尾添加上/root/pureftpd start 保存即可。

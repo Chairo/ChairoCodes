@@ -1,0 +1,4 @@
+configure: error: Your MySQL client libraries aren't properly installed
+编译安装pure-ftpd出现configure: error: Your MySQL client libraries aren't properly installed错误
+
+解决方法：执行 cp /usr/local/mysql/lib/mysql/*.* /usr/lib/

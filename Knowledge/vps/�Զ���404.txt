@@ -1,0 +1,23 @@
+1.创建自己的404.html页面
+2.更改nginx.conf在http定义区域加入：
+
+    fastcgi_intercept_errors on;
+
+3.更改nginx.conf或虚拟主机的域名.conf在server 区域加入：
+
+    error_page 404 = /404.html;
+
+4.测试nginx.conf正确性：
+/usr/local/nginx/sbin/nginx -t
+
+如果正确应该显示如下信息：
+
+    the configuration file /opt/nginx/conf/nginx.conf syntax is ok
+    configuration file /opt/nginx/conf/nginx.conf test is successful
+
+5.重启nginx
+kill -HUP  `cat /opt/nginx/nginx.pid `
+注意事项：
+1.必须要添加：fastcgi_intercept_errors on; 如果这个选项没有设置，即使创建了404.html和配置了error_page也没有效果。
+2.不要出于省事或者提高首页权重的目的将首页指定为404错误页面，也不要用其它方法跳转到首页。
+3.自定义的404页面必须大于512字节，否则可能会出现IE默认的404页面。例如，假设自定义了404.html,大小只有11个字节（内容为：404错误）。

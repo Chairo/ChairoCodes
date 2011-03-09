@@ -1,0 +1,13 @@
+1、screen安装方法就不说了，看vps侦探上的文章吧
+
+2、执行：screen -S lnmp 创建screen会话。
+
+2、执行：wget -c http://soft.vpser.net/lnmp/lnmp0.5-full.tar.gz 下载安装包。
+
+3、执行：tar zxvf lnmp0.5-full.tar.gz 解压。
+
+4、执行：cd lnmp0.5-full/ 进入lnmp0.5目录。
+
+5、Centos执行：./centos.sh ,Debian 执行：./debian.sh 进行安装。
+
+如果网络掉线，可以重新连接，再执行 screen -r lnmp 就会看到你的lnmp安装进程。

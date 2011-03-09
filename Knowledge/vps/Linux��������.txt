@@ -1,0 +1,3 @@
+tar -xvf c.tar.gz 解压文件
+
+tar -czvf c.tar.gz * 压缩当前所有文件
