@@ -1,0 +1,8 @@
+最简单的方法就是登录vps控制面板看，solusvm的都有虚拟技术的标志，据了解这个目前好像还无法造假
+
+uname -a 一般情况下xen的里面都会显示有xen
+
+free -m 看内存，openvz的没有swap，当然也有xen的没有swap，但是xen的是可以加的，openvz不行。
+
+一般openvz的ifconfig 查看网络，都是venet0:* ，xen的一般都是eth*
+能想到的暂时就这几个方法
