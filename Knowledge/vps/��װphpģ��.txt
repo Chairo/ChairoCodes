@@ -38,3 +38,6 @@ Installing shared extensions:     /usr/local/php/lib/php/extensions/no-debug-non
 查找：extension = 再最后一个extension= 后面添加上extension = "imap.so"
 
 保存，执行/root/lnmp restart 重启。
+
+configure: error: xslt-config not found. Please reinstall the libxslt >= 1.1.0 distribution
+yum install libxslt-devel
