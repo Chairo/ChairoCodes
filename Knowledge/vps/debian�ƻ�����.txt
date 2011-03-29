@@ -1,0 +1,3 @@
+0点15自动重启lnmp
+
+echo 15 00 * * * root /root/lnmp restart  >> /etc/crontab && crontab -l
