@@ -1,0 +1,34 @@
+用了一段时间Debian后，将几个常用的apt dpkg命令总结一些，这些都是安装软件经常用到的命令：
+查找软件包 apt-cache search 软件名称
+安装软件包 apt-get install ****
+查看信息 apt-cache show ***
+删除软件 apt-get remove ***
+dpkg命令：
+dpkg -i /**/**/**.deb 安装软件
+dpkg -x **.deb 解开.deb文件
+dpkg -r /-p 删除并清配置
+更详细的 用dpkg --help 查询 如下：
+dpkg -i|--install  ... | -R|--recursive  ...
+dpkg --unpack  ... | -R|--recursive  ...
+dpkg -A|--record-avail  ... | -R|--recursive  ...
+dpkg --configure  ... | -a|--pending
+dpkg -r|--remove | -P|--purge  ... | -a|--pending
+dpkg --get-selections [ ...] 把已选中的软件包的列表打印到标准输出
+dpkg --set-selections 从标准输入里读出要选择的软件包列表
+dpkg --update-avail 替换现可安装的软件包信息
+dpkg --merge-avail 把文件中的信息合并到系统中
+dpkg --clear-avail 清除现有的软件包信息
+dpkg --forget-old-unavail 忘却已被删除，现在却不能安装的软件包
+dpkg -s|--status  ... 显示软件包详尽的状态信息
+dpkg -p|--print-avail  ... 显示软件包当前可供安装的版本的详细信 息
+dpkg -L|--listfiles  ... 列出所有“属于”该软件包(或多个软件包)的文件
+dpkg -l|--list [ ... 简明地列出软件包的状态
+dpkg -S|--search  ... 搜寻拥有该文件(或多个文件)的软件包
+dpkg -C|--audit 检查搜寻残损的软件包
+dpkg --print-architecture 显示目标机的体系架构(借助 GCC)
+dpkg --print-gnu-build-architecture 显示目标机体系架构的 GNU 版本的表示
+dpkg --print-installation-architecture 显示本地主机的体系架构(用于安装)
+dpkg --compare-vesions    比较版本号 - 见下
+dpkg --help | --version 显示本帮助文档以及版本号
+dpkg --force-help | -Dh|--debug=help 强制操作时，有关出错方面的帮助
+dpkg --licence 显示版权和许可证的条文
