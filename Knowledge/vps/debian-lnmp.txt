@@ -1,0 +1,352 @@
+第二版Debian+Nginx+PHP(FastCGI)+MySQL搭建LNMP服务器，我用虚拟机搭建。我已经把所有的Debian的5张光盘全部下载下来了，因为我的网络不好，所以就用本地的光盘安装了，首先我们来看看虚拟机安装Debian 5这个系统，参考：http://www.freeopens.com/2010_05_1056.html
+
+安装好系统后，大家要安装SSH服务，否则远程管理就不方便了！我们用apt-get install ssh来进行安装。
+
+本次教程所用的系统环境：
+
+cat /proc/version
+Linux version 2.6.26-2-686 (Debian 2.6.26-21lenny4) (dannf@debian.org) (gcc version 4.1.3 20080704 (prerelease) (Debian 4.1.2-25)) #1 SMP Tue Mar 9 17:35:51 UTC 2010
+
+cat /etc/issue
+Debian GNU/Linux 5.0 \n \l
+
+uname -a
+Linux nginx 2.6.26-2-686 #1 SMP Tue Mar 9 17:35:51 UTC 2010 i686 GNU/Linux
+
+free
+             total       used       free     shared    buffers     cached
+Mem:        256400      70700     185700          0       7256      46400
+-/+ buffers/cache:      17044     239356
+Swap:       409616          0     409616
+
+在进行安装前，最好先检查一下，你的系统中是不是安装了mysql apache和一些其它的我们不需要的软件，如果有的话，就删除掉吧！
+
+netstat -ntlp
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 0.0.0.0:47074           0.0.0.0:*               LISTEN      1977/rpc.statd
+tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      1966/portmap
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      3036/sshd
+tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      2453/exim4
+tcp        0      0 127.0.0.1:6010          0.0.0.0:*               LISTEN      3046/0
+tcp6       0      0 :::22                   :::*                    LISTEN      3036/sshd
+tcp6       0      0 ::1:6010                :::*                    LISTEN      3046/0
+
+这是我们启动的服务，我们直接进行安装，以上可能会根据不同版本的Debain和安装的软件不一样，会有不同的结果。
+
+准备工作就算完工了，下面就开始进行安装LNMP服务器了。
+
+一、安装源码编译的环境和一些依 赖的库文件
+apt-get install build-essential libncurses5-dev libfreetype6-dev libxml2-dev libssl-dev libcurl4-openssl-dev libjpeg62-dev libpng12-dev libfreetype6-dev libsasl2-dev libpcre3-dev autoconf libperl-dev
+
+二、下载所需要的软件
+本文中提到的所有开源软件为截止到2009年04月14日的最新稳定版。
+从软件的官方网站下载： mkdir /root/soft
+cd /root/soft
+vim down.sh
+内容如下： wget http://sysoev.ru/nginx/nginx-0.8.36.tar.gz
+wget http://www.php.net/get/php-5.2.13.tar.gz/from/this/mirror
+wget http://php-fpm.org/downloads/php-5.2.13-fpm-0.5.13.diff.gz
+wget http://dev.mysql.com/get/Downloads/MySQL-5.5/mysql-5.5.3-m3.tar.gz/from/http://mysql.he.net/
+wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.tar.gz
+wget "http://downloads.sourceforge.net/mcrypt/libmcrypt-2.5.8.tar.gz?modtime=1171868460&big_mirror=0"
+wget "http://downloads.sourceforge.net/mcrypt/mcrypt-2.6.8.tar.gz?modtime=1194463373&big_mirror=0"
+wget http://pecl.php.net/get/memcache-2.2.5.tgz
+wget "http://downloads.sourceforge.net/mhash/mhash-0.9.9.9.tar.gz?modtime=1175740843&big_mirror=0"
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.01.tar.gz
+wget http://bart.eaccelerator.net/source/0.9.6/eaccelerator-0.9.6.tar.bz2
+wget http://pecl.php.net/get/PDO_MYSQL-1.0.2.tgz
+wget http://blog.s135.com/soft/linux/nginx_php/imagick/ImageMagick.tar.gz
+wget http://pecl.php.net/get/imagick-2.3.0.tgz
+
+设置可执行权限
+chmod +x down.sh
+开 始下载
+./down.sh 三、安装PHP 5.2.13（FastCGI模式）
+进入软件包 所在的目录/root/soft
+1、编译安装PHP 5.2.13所需的支持库
+tar zxvf libiconv-1.13.tar.gz
+cd libiconv-1.13
+./configure --prefix=/usr/local
+make && make install
+cd ..
+
+tar zxvf libmcrypt-2.5.8.tar.gz
+cd libmcrypt-2.5.8
+/sbin/ldconfig
+cd libltdl/
+./configure --enable-ltdl-install
+make && make install
+cd ..
+./configure
+make && make install
+cd ..
+
+tar zxvf mhash-0.9.9.9.tar.gz
+cd mhash-0.9.9.9/
+./configure
+make && make install
+cd ../
+
+ln -s /usr/local/lib/libmcrypt.la /usr/lib/libmcrypt.la
+ln -s /usr/local/lib/libmcrypt.so /usr/lib/libmcrypt.so
+ln -s /usr/local/lib/libmcrypt.so.4 /usr/lib/libmcrypt.so.4
+ln -s /usr/local/lib/libmcrypt.so.4.4.8 /usr/lib/libmcrypt.so.4.4.8
+ln -s /usr/local/lib/libmhash.a /usr/lib/libmhash.a
+ln -s /usr/local/lib/libmhash.la /usr/lib/libmhash.la
+ln -s /usr/local/lib/libmhash.so /usr/lib/libmhash.so
+ln -s /usr/local/lib/libmhash.so.2 /usr/lib/libmhash.so.2
+ln -s /usr/local/lib/libmhash.so.2.0.1 /usr/lib/libmhash.so.2.0.1
+ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
+
+tar zxvf mcrypt-2.6.8.tar.gz
+cd mcrypt-2.6.8/
+/sbin/ldconfig
+./configure
+make && make install
+cd ../
+
+2、编译安装MySQL 5.5.2-m2
+/usr/sbin/groupadd mysql
+/usr/sbin/useradd -g mysql mysql
+tar zxvf mysql-5.5.3-m3.tar.gz
+cd mysql-5.5.3-m3/
+./configure --prefix=/usr/local/webserver/mysql/ --enable-assembler --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-readline --with-ssl --with-embedded-server --enable-local-infile --with-plugins=partition,innobase,myisammrg
+make && make install
+chmod +w /usr/local/webserver/mysql
+chown -R mysql:mysql /usr/local/webserver/mysql
+cd ../
+①、创建MySQL数据库存放目录
+mkdir -p /data0/mysql/3306/data/
+mkdir -p /data0/mysql/3306/binlog/
+mkdir -p /data0/mysql/3306/relaylog/
+chown -R mysql:mysql /data0/mysql/
+②、以mysql用户帐号的身份建立数据表
+/usr/local/webserver/mysql/bin/mysql_install_db --basedir=/usr/local/webserver/mysql --datadir=/data0/mysql/3306/data --user=mysql
+③、创建my.cnf配置文件
+vi /data0/mysql/3306/my.cnf
+输入以下内容：
+
+
+
+[client]
+character-set-server = utf8
+port    = 3306
+socket  = /tmp/mysql.sock
+
+[mysqld]
+character-set-server = utf8
+replicate-ignore-db = mysql
+replicate-ignore-db = test
+replicate-ignore-db = information_schema
+user    = mysql
+port    = 3306
+socket  = /tmp/mysql.sock
+basedir = /usr/local/webserver/mysql
+datadir = /data0/mysql/3306/data
+log-error = /data0/mysql/3306/mysql_error.log
+pid-file = /data0/mysql/3306/mysql.pid
+open_files_limit    = 10240
+back_log = 600
+max_connections = 5000
+max_connect_errors = 6000
+table_cache = 614
+external-locking = FALSE
+max_allowed_packet = 32M
+sort_buffer_size = 1M
+join_buffer_size = 1M
+thread_cache_size = 300
+#thread_concurrency = 8
+query_cache_size = 512M
+query_cache_limit = 2M
+query_cache_min_res_unit = 2k
+default-storage-engine = MyISAM
+thread_stack = 192K
+transaction_isolation = READ-COMMITTED
+tmp_table_size = 246M
+max_heap_table_size = 246M
+long_query_time = 3
+log-slave-updates
+log-bin = /data0/mysql/3306/binlog/binlog
+binlog_cache_size = 4M
+binlog_format = MIXED
+max_binlog_cache_size = 8M
+max_binlog_size = 1G
+relay-log-index = /data0/mysql/3306/relaylog/relaylog
+relay-log-info-file = /data0/mysql/3306/relaylog/relaylog
+relay-log = /data0/mysql/3306/relaylog/relaylog
+expire_logs_days = 30
+key_buffer_size = 256M
+read_buffer_size = 1M
+read_rnd_buffer_size = 16M
+bulk_insert_buffer_size = 64M
+myisam_sort_buffer_size = 128M
+myisam_max_sort_file_size = 10G
+myisam_repair_threads = 1
+myisam_recover
+
+interactive_timeout = 120
+wait_timeout = 120
+
+skip-name-resolve
+#master-connect-retry = 10
+slave-skip-errors = 1032,1062,126,1114,1146,1048,1396
+
+#master-host     =   192.168.1.2
+#master-user     =   username
+#master-password =   password
+#master-port     =  3306
+
+server-id = 1
+
+innodb_additional_mem_pool_size = 16M
+innodb_buffer_pool_size = 512M
+innodb_data_file_path = ibdata1:256M:autoextend
+innodb_file_io_threads = 4
+innodb_thread_concurrency = 8
+innodb_flush_log_at_trx_commit = 2
+innodb_log_buffer_size = 16M
+innodb_log_file_size = 128M
+innodb_log_files_in_group = 3
+innodb_max_dirty_pages_pct = 90
+innodb_lock_wait_timeout = 120
+innodb_file_per_table = 0
+
+#log-slow-queries = /data0/mysql/3306/slow.log
+#long_query_time = 10
+
+[mysqldump]
+quick
+max_allowed_packet = 32M
+
+
+
+
+
+④、创建管理MySQL数据库的shell脚本
+
+vi /data0/mysql/3306/mysql
+输入以下内容：
+#!/bin/sh
+
+mysql_port=3306
+mysql_username="admin"
+mysql_password="12345678"
+
+function_start_mysql()
+{
+    printf "Starting MySQL...\n"
+    /bin/sh /usr/local/webserver/mysql/bin/mysqld_safe --defaults-file=/data0/mysql/${mysql_port}/my.cnf 2>&1 > /dev/null &
+}
+
+function_stop_mysql()
+{
+    printf "Stoping MySQL...\n"
+    /usr/local/webserver/mysql/bin/mysqladmin -u ${mysql_username} -p${mysql_password} -S /tmp/mysql.sock shutdown
+}
+
+function_restart_mysql()
+{
+    printf "Restarting MySQL...\n"
+    function_stop_mysql
+    sleep 5
+    function_start_mysql
+}
+
+function_kill_mysql()
+{
+    kill -9 $(ps -ef &#124; grep 'bin/mysqld_safe' &#124; grep ${mysql_port} &#124; awk '{printf $2}')
+    kill -9 $(ps -ef &#124; grep 'libexec/mysqld' &#124; grep ${mysql_port} &#124; awk '{printf $2}')
+}
+
+if [ "$1" = "start" ]; then
+    function_start_mysql
+elif [ "$1" = "stop" ]; then
+    function_stop_mysql
+elif [ "$1" = "restart" ]; then
+function_restart_mysql
+elif [ "$1" = "kill" ]; then
+function_kill_mysql
+else
+    printf "Usage: /data0/mysql/${mysql_port}/mysql {start&#124;stop&#124;restart&#124;kill}\n"
+fi
+
+
+
+
+
+⑤、赋予shell脚本可执行权限
+chmod +x /data0/mysql/3306/mysql ⑥、启动MySQL
+/data0/mysql/3306/mysql start ⑦、设置MySql root用户的密码(记住，后面用到)
+/usr/local/webserver/mysql/bin/mysqladmin -u root password '123456789' ⑧、通过命令行登录管理MySQL服务器（提示 输入密码时，输入刚才设置的密码）
+/usr/local/webserver/mysql/bin/mysql -u root -p -S /tmp/mysql.sock
+输入刚才前面设置的密码：123456789
+这 时就在mysql>的提示符状态
+⑨、输入以下SQL语句，创建一个具有root权限的用户（admin）和密码（12345678）
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY '12345678';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'127.0.0.1' IDENTIFIED BY '12345678';
+quit;
+⑩、（可选）停止MySQL
+/data0/mysql/3306/mysql stop 3、编译安装PHP（FastCGI模式）
+tar zxvf php-5.2.13.tar.gz
+gzip -cd php-5.2.13-fpm-0.5.13.diff.gz | patch -d php-5.2.13 -p1
+cd php-5.2.13/
+./configure --prefix=/usr/local/webserver/php --with-config-file-path=/usr/local/webserver/php/etc --with-mysql=/usr/local/webserver/mysql --with-mysqli=/usr/local/webserver/mysql/bin/mysql_config --with-iconv-dir=/usr/local --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-discard-path --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --enable-mbstring --with-mcrypt --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-ldap --with-ldap-sasl --with-xmlrpc --enable-zip --enable-soap
+make ZEND_EXTRA_LIBS='-liconv'
+make install
+cp php.ini-dist /usr/local/webserver/php/etc/php.ini
+cd ../
+
+4、编译安装PHP5扩展模块
+tar zxvf memcache-2.2.5.tgz
+cd memcache-2.2.5/
+/usr/local/webserver/php/bin/phpize
+./configure --with-php-config=/usr/local/webserver/php/bin/php-config
+make && make install
+cd ../
+
+tar jxvf eaccelerator-0.9.6.tar.bz2
+cd eaccelerator-0.9.6/
+/usr/local/webserver/php/bin/phpize
+./configure --enable-eaccelerator=shared --with-php-config=/usr/local/webserver/php/bin/php-config
+make && make install
+cd ../
+
+tar zxvf PDO_MYSQL-1.0.2.tgz
+cd PDO_MYSQL-1.0.2/
+/usr/local/webserver/php/bin/phpize
+./configure --with-php-config=/usr/local/webserver/php/bin/php-config --with-pdo-mysql=/usr/local/webserver/mysql
+make && make install
+cd ../
+
+tar zxvf ImageMagick.tar.gz
+cd ImageMagick-6.5.1-2/
+./configure
+make && make install
+cd ../
+
+tar zxvf imagick-2.3.0.tgz
+cd imagick-2.3.0/
+/usr/local/webserver/php/bin/phpize
+./configure --with-php-config=/usr/local/webserver/php/bin/php-config
+make && make install
+cd ../
+
+5、修改php.ini文件
+手工修改：
+查找/usr/local /webserver/php/etc/php.ini中的
+extension_dir = "./"
+修改为
+extension_dir = "/usr/local/webserver/php/lib/php/extensions/no-debug-non-zts-20060613/"
+并在此行后增加以下几行，然后保存：
+extension = "memcache.so"
+extension = "pdo_mysql.so"
+extension = "imagick.so"
+
+再查找
+output_buffering = Off
+修 改为
+output_buffering = On 自动修改：
+sed -i 's#extension_dir = "./"#extension_dir = "/usr/local/webserver/php/lib/php/extensions/no-debug-non-zts-20060613/"\nextension = "memcache.so"\nextension = "pdo_mysql.so"\nextension = "imagick.so"\n#' /usr/local/webserver/php/etc/php.ini
+sed -i 's#output_buffering = Off#output_buffering = On#' /usr/local/webserver/php/etc/php.ini
+sed -i "s#; always_populate_raw_post_data = On#always_populate_raw_post_data = On#g" /usr/local/webserver/php/etc/php.ini
