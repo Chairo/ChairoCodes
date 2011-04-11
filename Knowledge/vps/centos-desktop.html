@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=x-gbk">
+<link rel="icon" href="http://www.jb51.net/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="http://www.jb51.net/favicon.ico" type="image/x-icon">
+<meta http-equiv="Content-Language" content="zh-CN">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<title>Centos安装桌面一键包_RedHat/Centos_操作系统_脚本之家</title>
+<meta name="keywords" content="Centos 桌面">
+<meta name="description" content="VPSYOU今天提供了一个Centos安装桌面一键包，很方便。deepvps已经测试成功了，有兴趣的VPSer可以自己试试。">
+<link href="33580_files/jb51.css" rel="stylesheet" type="text/css">
+<link href="33580_files/article.css" rel="stylesheet" type="text/css">
+<script src="33580_files/main.js" type="text/javascript"></script>
+<script language="javascript" src="33580_files/ajax2.js"></script>
+<script language="javascript">
+function Digg(divId,aid){
+   var taget_obj = document.getElementById(divId+''+aid);
+   var myajax = new DedeAjax(taget_obj,false,false,"","","");
+   myajax.SendGet2("/do/digg.php?action=digg&aid="+aid);
+   DedeXHTTP = null;
+}
+function setfont(fsize){
+	var ctext = document.getElementById("content");
+	ctext.style.fontSize = fsize +"px";
+}
+document.body.oncopy = function () { 
+	setTimeout( function () { 
+		var text = getClipboard();
+		if (text) { 
+			text = text + "\r\n详细出处参考："+location.href.toString(); 
+copy2Clipboard(text);
+		} 
+				}, 100 ) 
+}
+</script>
+<script>try {  for(var lastpass_iter=0; lastpass_iter < document.forms.length; lastpass_iter++){    var lastpass_f = document.forms[lastpass_iter];    if(typeof(lastpass_f.lpsubmitorig)=="undefined"){      if (typeof(lastpass_f.submit) == "function") {        lastpass_f.lpsubmitorig = lastpass_f.submit;        lastpass_f.submit = function(){          var form = this;          try {            if (document.documentElement && 'createEvent' in document)            {              var forms = document.getElementsByTagName('form');              for (var i=0 ; i<forms.length ; ++i)                if (forms[i]==form)                {                  var element = document.createElement('lpformsubmitdataelement');                  element.setAttribute('formnum',i);                  element.setAttribute('from','submithook');                  document.documentElement.appendChild(element);                  var evt = document.createEvent('Events');                  evt.initEvent('lpformsubmit',true,false);                  element.dispatchEvent(evt);                  break;                }            }          } catch (e) {}          try {            form.lpsubmitorig();          } catch (e) {}        }      }    }  }} catch (e) {}</script></head>
+<body>
+<!--头部开始-->
+<div class="pcbody">
+<div id="topnav">
+<div id="toptext">脚 本 之 家 www.jb51.net</div>
+<ul id="topnavlist">
+<script type="text/javascript" src="33580_files/top.js"></script>
+</ul>
+</div>
+<div id="dxy_logo">
+<div id="logo_l"><a href="http://www.jb51.net/" title="脚本之家" target="_blank"><img src="33580_files/logo.gif" alt="脚本之家"></a></div>
+<div id="logo_m"></div>
+<div id="logo_r"></div>
+</div>
+<!--导航栏-->
+<div id="nav_top">
+<ul>
+<li><a href="http://www.jb51.net/"><span>首页</span></a></li>
+<li><a href="http://www.jb51.net/web/index.html" title="网页制作"><span>网页制作</span></a></li>
+<li><a href="http://www.jb51.net/list/index_96.htm" title="脚本专栏"><span>脚本专栏</span></a></li>
+<li><a href="http://www.jb51.net/list/index_1.htm" title="网络编程"><span>网络编程</span></a></li>
+<li><a href="http://www.jb51.net/list/index_104.htm" title="数据库"><span>数据库</span></a></li>
+<li><a href="http://www.jb51.net/jiaoben/" title="脚本下载"><span>脚本下载</span></a></li>
+<li><a href="http://www.jb51.net/cms/" title="cms使用教程"><span>程序教学</span></a></li>
+<li><a href="http://www.jb51.net/books/" title="电子书籍"><span>电子书籍</span></a></li>
+<li><a href="http://www.jb51.net/pingmian/" title="平面设计"><span>平面设计</span></a></li>
+<li><a href="http://www.jb51.net/media/" title="媒体动画"><span>媒体动画</span></a></li>
+<li><a href="http://www.jb51.net/moban/" title="模板下载"><span>模板下载</span></a></li>
+<li><a href="http://www.jb51.net/os/" title="操作系统"><span>操作系统</span></a></li>
+<li><a href="http://www.jb51.net/yunying/" title="网站运营"><span>网站运营</span></a></li>    
+</ul>
+</div> 
+<div class="main cbody margintop"><script type="text/javascript">/*首屏960*60通栏 主站*/ var cpro_id = 'u336546';</script><script src="33580_files/c.js" type="text/javascript"></script></div>  
+<div class="main cbody margintop" id="tonglan960"></div>
+<!--内容-->
+<div class="main cbody margintop">
+	<!--左侧-->
+	<div class="pleft">
+		<!--位置导航-->
+		<div class="thisplace">
+			<div class="title"></div>
+			<div class="placenav">
+				<span>当前位置 :</span> 
+				<a href="http://www.jb51.net/">主页</a> &gt; <a href="http://www.jb51.net/os/">操作系统</a> &gt; <a href="http://www.jb51.net/os/RedHat/">RedHat/Centos</a> &gt; 
+			</div>
+		</div>
+		<!--资讯内容-->
+		<div class="newsview">
+			<!--资讯标题-->
+			<div class="title">
+				<h1>Centos安装桌面一键包</h1>
+			</div>
+            <div class="info" id="title_ad1">
+            </div>
+			<!--相关信息-->
+			<div class="info">
+				<span>来源：互联网</span>
+				<span>作者：佚名</span>
+				<span>时间：12-20 11:13:19</span>
+				<span>【<a href="javascript:setfont(15)">大</a> <a href="javascript:setfont(13)">中</a> <a href="javascript:setfont(12)">小</a>】</span>                
+			</div>
+	    <!--资讯正文-->
+			<div id="content">
+            <div id="art_desc"><strong>点评</strong>：VPSYOU今天提供了一个Centos安装桌面一键包，很方便。deepvps已经测试成功了，有兴趣的VPSer可以自己试试。</div>
+<div id="con_1"><script type="text/javascript" src="33580_files/art336.js"></script></div>
+<p>下面是转载VPSYOU官方网站上的文章内容：</p>
+<p>之前也发布过关于在centos安装桌面的教程，那个太过于繁琐，今天发布一个Centos下安装X Window+GNOME Desktop的一键包，希望能方便那些需要在centos下安装图形界面的客户！<br><strong>特别说明：本站只提供安装的一键包，不再提供任何与之相关的技术支持；本站不承担安装此一键包后出现影响生产环境之类等一切严重后台，故建议客户是在一个干净的centos系统里安装，另建议内存在768以上的客户安装及建议安装在32位的centos系统上！</strong><br>本安装包本站已在centos5.5 32bit上安装成功，软装不成功可能与你之前安装的有软件上冲突之类的，请重装系统重试！<span id="more-480"></span><br><strong>安装过程：</strong><br>wget http://www.vpsyou.com/sh/xwindow.sh;sh ./xwindow.sh;<br>将上面1行复制，粘贴到您的linux ssh控制台里，回车，全自动安装，等待5-30分钟即可完成！<br>出现如下图时，按回车就行，表明你已经安装成功<br><img title="未命名" alt="" src="33580_files/3.jpg" height="177" width="591"><br><strong>如何登陆：</strong><br>1.用<a href="http://www.winscp.com/"><font color="#0044aa">winscp</font></a>登陆你的vps，下载/backup/www.vpsyou.com/client.id_dsa.key到本地<br>2..下载FreeNX Windows 客户端并安装，下载地址：<br><a href="http://www.nomachine.com/download-client-windows.php"><font color="#0044aa">http://www.nomachine.com/download-client-windows.php</font></a><br>3..安装FreeNX后打开，输入root，密码及vps的IP，并导入刚才下载回来的client.id_dsa.key，具体请看图：<br><img title="f1" alt="" src="33580_files/1114181.jpg" height="269" width="374"><br><img title="f2" alt="" src="33580_files/1114182.jpg" height="485" width="369"><br><img title="f3" alt="" src="33580_files/1114183.jpg" height="429" width="375"><br><img title="f4" alt="" src="33580_files/1114184.jpg" height="319" width="592"><br><img title="f5" alt="" src="33580_files/1114185.jpg" height="616" width="624"><br><img title="f6" alt="" src="33580_files/1114186.jpg" height="561" width="614"></p><br>
+
+            </div>
+<div class="articlead" id="art580"><script type="text/javascript" src="33580_files/art580.js"></script></div>
+<div class="cupage"></div>
+<div class="tag">
+Tag：<b><a href="http://www.jb51.net/do/tag/centos/">centos</a></b> &nbsp; <b><a href="http://www.jb51.net/do/tag/%D7%C0%C3%E6/">桌面</a></b> &nbsp; 
+</div>
+<script type="text/javascript" src="33580_files/fav.js"></script>
+			<div class="actbar">
+				<span>[<a href="javascript:addBookmark(document.title,document.location.href)" class="button_link">收藏</a>]</span>
+			<span>[<a title="复制本文链接发给你QQ/MSN上的好友" href="javascript:%20copyUserHomeToClipBoard()" rel="nofollow" class="button_link">复制链接发给好友</a>]</span>
+				<span>[<a href="http://www.jb51.net/do/plus/feedback.php?arcID=33580">评论</a>]</span>
+				<span>[<a href="#" onclick="window.print();">打印</a>]</span>
+				<span>[<a href="javascript:closeWindow()" class="button_link">关闭</a>]</span>
+			</div>
+            <!--上下文-->
+            <div class="context">
+                <div id="digg33580" class="diggArea">
+                <div class="diggNum">0</div>
+                <div class="diggLink"><a href="javascript:Digg('digg',33580);">顶一下</a></div>
+                </div>
+
+                 <div style="float:left; margin-left:20px;">
+                    上一篇：没有了 
+                    <br>
+                    下一篇：<a href="http://www.jb51.net/os/RedHat/33582.html">检测你的VPS是不是真的做了RAID10</a> 
+                </div>
+           </div>
+           <div class="floatclear"><!--清除浮动--></div>
+		</div>
+<div class="art_bot_ad"><script type="text/javascript" src="33580_files/bc_bot_ad.js"></script></div>       
+<div id="relatedarticle">
+<h2>相关文章</h2>
+<ul>
+<li><a href="http://www.jb51.net/os/RedHat/34935.html">使用Putty(SSH)登录管理CentOS VPS的方法</a></li><li><a href="http://www.jb51.net/os/RedHat/34547.html">CentOS 5.4 rsync+inotify配置触发式(实时)文件远程同</a></li><li><a href="http://www.jb51.net/os/RedHat/34043.html">centos5.3 搭建DNS多域名解析服务器的教程</a></li><li><a href="http://www.jb51.net/os/RedHat/33707.html">Centos服务器下安装Mydns及MydnsConfig</a></li><li><a href="http://www.jb51.net/os/RedHat/33584.html">使用logrotate管理VPS日志文件的方法</a></li><li><a href="http://www.jb51.net/os/RedHat/33583.html">Linux VPS下备份网站数据到ftp的一键脚本</a></li><li><a href="http://www.jb51.net/os/RedHat/33582.html">检测你的VPS是不是真的做了RAID10</a></li><li><a href="http://www.jb51.net/os/RedHat/33580.html">Centos安装桌面一键包</a></li>
+</ul>
+<div class="clear"></div></div>
+		<div class="comment">
+			<!--评论:标题-->
+			<div class="commenttitle">
+				<div class="title"><strong>最新评论</strong>共有 0 位网友发表了评论 </div>
+				<div class="gotopost"><a href="http://www.jb51.net/do/plus/feedback.php?arcID=33580">查看所有评论</a></div>
+			</div>
+			<!--评论内容-->
+			<div class="commentbox" id="commentdxy"></div>
+			<!--发表评论:标题-->
+			<div class="posttitle"><strong>发表评论</strong></div>
+			<!--发表评论-->
+            <form action="/do/plus/feedback.php?action=send" method="post" name="feedback">
+			<input name="arcID" value="33580" type="hidden">
+			<div class="postbox">
+				<div class="txtbox">
+					<strong>评论内容：</strong>不能超过250字，需审核，请自觉遵守互联网相关政策法规。
+					<textarea name="msg" cols="60" rows="6" onclick="this.style.background='#FFFFFF'"></textarea>
+				</div>
+				<div class="userbox">
+					<dl>
+						<dd>
+							用户名：<input name="username" class="username" maxlength="20" value="guest" onmouseover="this.select();" onclick="if(this.value=='guest'){this.value=''}" type="text">
+							密码：<input name="pwd" class="password" maxlength="20" value="guest" onmouseover="this.select();" onclick="if(this.value=='guest'){this.value=''}" type="password">
+						</dd>
+						<dd></dd>
+						<dd class="mtop"><input name="notuser" value="1" checked="checked" type="checkbox">匿名评论</dd>
+						<dd><input name="sb" class="submit" value="" onclick='javascript:if(document.feedback.msg.value!="") document.feedback.submit(); else alert("评论内容不能为空！");' type="button">
+					  </dd>
+						<dd class="mtop"><a href="http://www.jb51.net/do/member/index_do.php?fmdo=user&amp;dopost=regnew" target="_blank"><img src="33580_files/register.gif" alt="立即注册账号"></a></dd>
+					</dl>
+			</div>
+			</div></form>
+		</div>
+	</div>
+	<!--右侧-->
+	<div class="pright">
+<div class="rlist2"><div class="rbox2"><script src="33580_files/vod250.js"></script></div></div>
+<div class="classbox margintop">
+			<dl>
+				<dt>相关栏目</dt>
+				<dd>
+					<ul>
+              
+              <li><a href="http://www.jb51.net/os/windows/">Windows系列</a></li>
+              
+              <li><a href="http://www.jb51.net/os/list490_1.html">系统安装</a></li>
+              
+              <li><a href="http://www.jb51.net/os/list381_1.html">注册表</a></li>
+              
+              <li><a href="http://www.jb51.net/LINUXjishu/list314_1.html">LINUX技术</a></li>
+              
+              <li><a href="http://www.jb51.net/os/Ubuntu/">Ubuntu</a></li>
+              
+              <li><a href="http://www.jb51.net/os/Solaris/">Solaris</a></li>
+              
+              <li><a href="http://www.jb51.net/os/qilin/">麒麟系统</a></li>
+              
+              <li><a href="http://www.jb51.net/os/hongqi/">红旗Linux</a></li>
+              
+					</ul>
+				</dd>
+			</dl>
+	  </div>
+<div class="rlist"><script language="javascript" src="33580_files/r_1.js"></script></div>
+  <div class="rlist margintop">
+			<div class="title">热点关注</div>
+			<div class="rbox">
+				<ul>
+            <li><a href="http://www.jb51.net/os/RedHat/1077.html">REDHAT企业版LINUX5.0安装过程图解教程</a></li><li><a href="http://www.jb51.net/os/RedHat/1219.html">tar解压命令详解</a></li><li><a href="http://www.jb51.net/os/RedHat/1109.html">linux的mount（挂载）命令详解</a></li><li><a href="http://www.jb51.net/os/RedHat/1261.html">查看linux 下已经安装的软件包信息</a></li><li><a href="http://www.jb51.net/os/RedHat/1274.html">tar.gz 和tar.bz2 详细解释</a></li><li><a href="http://www.jb51.net/os/RedHat/1257.html">Red Hat Enterprise Linux AS4（ 企业版4.0下载）</a></li><li><a href="http://www.jb51.net/os/RedHat/1285.html">linux进入图形界面的方法</a></li><li><a href="http://www.jb51.net/os/RedHat/9467.html">linux kill 关闭进程命令</a></li><li><a href="http://www.jb51.net/os/RedHat/2461.html">linux下svn命令大全</a></li><li><a href="http://www.jb51.net/os/RedHat/1334.html">Linux关机命令详解</a></li><li><a href="http://www.jb51.net/os/RedHat/26370.html">CentOS 5.5 最新版下载地址 比较流行的服务器操作系统</a></li><li><a href="http://www.jb51.net/os/RedHat/1315.html">redhat9.0下载地址</a></li>
+				</ul>
+			</div>
+		</div>
+		<!--侧边信息列表-->
+		    <div class="rlist margintop">
+      <div class="title">赞助商链接</div>
+        <div class="rbox" style="padding:0px" id="bd200"></div>
+    </div>
+	</div>
+	<div class="floatclear"><!--清除浮动--></div>
+</div>
+<div class="blank3"></div>
+<div id="footer">
+  <div id="footerinfo">
+    <div id="footercontent"><a href="http://www.jb51.net/about.htm">关于本站</a> - <a href="http://www.jb51.net/support.htm">广告合作</a> - <a href="http://www.jb51.net/linkus.htm">联系我们</a> -  <a href="http://www.jb51.net/sm.htm">免责声明</a> -  <a href="http://www.jb51.net/sitemap.htm">网站地图</a> - <a href="http://www.jb51.net/do/plus/guestbook/index.php">意见反馈</a> - <a href="#top">返回顶部</a></div>
+    <div id="footercopyrights">欢迎转载我们的原创作品，转载请注明出处。<a href="http://www.miibeian.gov.cn/">苏ICP备06043639号</a><br>
+      <span>Copyright &#169; 2006-2010 www.jb51.net online services. All rights reserved. . </span><br>
+	 QQ群1:14624678 QQ群2:36345889或业务QQ:461478385 <br><script language="javascript" src="33580_files/zanzhu.js"></script></div>
+  </div>
+</div>
+<script type="text/javascript">
+document.body.oncopy = function () { 
+	setTimeout( function () { 
+		var text = getClipboard();
+		if (text) { 
+			text = text + "\r\n详细出处参考："+document.location.href; 
+copy2Clipboard(text);
+
+		} 
+				}, 100 ) 
+}
+</script>
+<div id="logo_m_tp"><script type="text/javascript" src="33580_files/logo_m.js"></script></div>
+<div id="logo_r_tp"><script type="text/javascript" src="33580_files/logo_r2.js"></script></div>
+<div id="title_ad1_tp"><script type="text/javascript" src="33580_files/bc_txt_1.js"></script></div>
+<div id="tonglan960_tp"><script type="text/javascript" src="33580_files/tonglan.js"></script></div>
+<div id="bd200_tp"><script type="text/javascript" src="33580_files/bd200.js"></script></div>
+<script type="text/javascript" src="33580_files/control_ad.js"></script>
+<script type="text/javascript" src="33580_files/big5style.js"></script>
+<div class="tongji">
+<script language="javascript" type="text/javascript" src="33580_files/tongji2.js"></script>
+<script src="33580_files/count.htm" language="javascript" type="text/javascript"></script>
+</div>
+
+</div></body></html>

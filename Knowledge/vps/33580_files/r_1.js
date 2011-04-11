@@ -1,0 +1,1 @@
+﻿document.write('<a href="http://www.hb666.net" target="_blank"><img src="http://img.jb51.net/imgby/hb666_255.gif" width=255 height=200 /></a>');
