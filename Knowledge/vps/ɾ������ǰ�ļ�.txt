@@ -1,0 +1,8 @@
+find . -ctime +1 -type f | xargs rm -rf
+表示删除一天前文件
+
+find . -size -100c | xargs rm -rf
+
+表示删除文件小于100字节的文件
+
+xargs表示拼凑命令并执行
