@@ -1,0 +1,270 @@
+pacman -Syu
+pacman-db-upgrade
+pacman -Syu
+
+mkdir -p /data0/software
+cd /data0/software
+
+安装所需模块
+pacman -S make gcc autoconf libjpeg libpng libxml2  zlib glibc glib2 bzip2 ncurses curl e2fsprogs libidn openssl nss_ldap openldap-clients patch freetype2 libxslt
+
+下载文件
+wget http://sysoev.ru/nginx/nginx-1.0.0.tar.gz
+wget http://www.php.net/get/php-5.2.14.tar.gz/from/this/mirror
+wget http://php-fpm.org/downloads/php-5.2.14-fpm-0.5.14.diff.gz
+--wget http://dev.mysql.com/get/Downloads/MySQL-5.1/mysql-5.1.48.tar.gz/from/http://mysql.he.net/
+wget http://dev.mysql.com/get/Downloads/MySQL-5.1/mysql-5.1.56.tar.gz/from/ftp://mirror.services.wisc.edu/mirrors/mysql/
+--wget http://soft.vpser.net/datebase/mysql/mysql-5.1.48.tar.gz
+wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz
+wget "http://downloads.sourceforge.net/mcrypt/libmcrypt-2.5.8.tar.gz?modtime=1171868460&big_mirror=0"
+wget "http://downloads.sourceforge.net/mcrypt/mcrypt-2.6.8.tar.gz?modtime=1194463373&big_mirror=0"
+wget http://pecl.php.net/get/memcache-2.2.5.tgz
+wget "http://downloads.sourceforge.net/mhash/mhash-0.9.9.9.tar.gz?modtime=1175740843&big_mirror=0"
+wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.10.tar.gz
+wget http://bart.eaccelerator.net/source/0.9.6.1/eaccelerator-0.9.6.1.tar.bz2
+wget http://pecl.php.net/get/PDO_MYSQL-1.0.2.tgz
+wget http://blog.s135.com/soft/linux/nginx_php/imagick/ImageMagick.tar.gz
+wget http://pecl.php.net/get/imagick-2.3.0.tgz
+
+1、编译安装PHP 5.2.14所需的支持库：
+tar zxvf libiconv-1.13.1.tar.gz
+cd libiconv-1.13.1/
+./configure --prefix=/usr/local
+make && make install
+cd ../
+
+tar zxvf libmcrypt-2.5.8.tar.gz
+cd libmcrypt-2.5.8/
+./configure
+make && make install
+/sbin/ldconfig
+cd libltdl/
+./configure --enable-ltdl-install
+make && make install
+cd ../../
+
+tar zxvf mhash-0.9.9.9.tar.gz
+cd mhash-0.9.9.9/
+./configure
+make && make install
+cd ../
+
+ln -s /usr/local/lib/libmcrypt.la /usr/lib/libmcrypt.la
+ln -s /usr/local/lib/libmcrypt.so /usr/lib/libmcrypt.so
+ln -s /usr/local/lib/libmcrypt.so.4 /usr/lib/libmcrypt.so.4
+ln -s /usr/local/lib/libmcrypt.so.4.4.8 /usr/lib/libmcrypt.so.4.4.8
+ln -s /usr/local/lib/libmhash.a /usr/lib/libmhash.a
+ln -s /usr/local/lib/libmhash.la /usr/lib/libmhash.la
+ln -s /usr/local/lib/libmhash.so /usr/lib/libmhash.so
+ln -s /usr/local/lib/libmhash.so.2 /usr/lib/libmhash.so.2
+ln -s /usr/local/lib/libmhash.so.2.0.1 /usr/lib/libmhash.so.2.0.1
+ln -s /usr/local/bin/libmcrypt-config /usr/bin/libmcrypt-config
+
+tar zxvf mcrypt-2.6.8.tar.gz
+cd mcrypt-2.6.8/
+/sbin/ldconfig
+./configure
+make && make install
+cd ../
+
+　2、编译安装MySQL
+/usr/sbin/groupadd mysql
+/usr/sbin/useradd -g mysql mysql
+tar zxvf mysql-5.1.56.tar.gz
+cd mysql-5.1.56/
+
+./configure --prefix=/usr/local/webserver/mysql/ --enable-assembler --with-extra-charsets=complex --enable-thread-safe-client --with-big-tables --with-readline --with-ssl --with-embedded-server --enable-local-infile
+make && make install
+chmod +w /usr/local/webserver/mysql
+chown -R mysql:mysql /usr/local/webserver/mysql
+cd ../
+
+①、创建MySQL数据库存放目录
+mkdir -p /data0/mysql/3306/data/
+mkdir -p /data0/mysql/3306/binlog/
+mkdir -p /data0/mysql/3306/relaylog/
+chown -R mysql:mysql /data0/mysql/
+
+②、以mysql用户帐号的身份建立数据表：
+/usr/local/webserver/mysql/bin/mysql_install_db --basedir=/usr/local/webserver/mysql --datadir=/data0/mysql/3306/data --user=mysql
+
+③、创建my.cnf配置文件：
+vi /data0/mysql/3306/my.cnf
+
+④、创建管理MySQL数据库的shell脚本：
+vi /data0/mysql/3306/mysql
+
+⑤、赋予shell脚本可执行权限：
+chmod +x /data0/mysql/3306/mysql
+
+⑥、启动MySQL：
+/data0/mysql/3306/mysql start
+
+⑦、通过命令行登录管理MySQL服务器（提示输入密码时直接回车）：
+/usr/local/webserver/mysql/bin/mysql -u root -p -S /tmp/mysql.sock
+
+⑧、输入以下SQL语句，创建一个具有root权限的用户（admin）和密码（12345678）：
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY '12345678';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'127.0.0.1' IDENTIFIED BY '12345678';
+
+⑨、（可选）停止MySQL：
+/data0/mysql/3306/mysql stop
+
+编译安装PHP（FastCGI模式）
+tar zxvf php-5.2.14.tar.gz
+gzip -cd php-5.2.14-fpm-0.5.14.diff.gz | patch -d php-5.2.14 -p1
+cd php-5.2.14/
+./configure --prefix=/usr/local/webserver/php --with-config-file-path=/usr/local/webserver/php/etc --with-mysql=/usr/local/webserver/mysql --with-mysqli=/usr/local/webserver/mysql/bin/mysql_config --with-iconv-dir=/usr/local --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=/usr --enable-xml --disable-rpath --enable-discard-path --enable-safe-mode --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --with-curlwrappers --enable-mbregex --enable-fastcgi --enable-fpm --enable-force-cgi-redirect --enable-mbstring --with-mcrypt --with-gd --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-ldap --with-ldap-sasl --with-xmlrpc --enable-zip --enable-soap --with-xsl=/usr/include/libxslt
+make ZEND_EXTRA_LIBS='-liconv'
+make install
+cp php.ini-dist /usr/local/webserver/php/etc/php.ini
+cd ../
+
+4、编译安装PHP5扩展模块
+tar zxvf memcache-2.2.5.tgz
+cd memcache-2.2.5/
+/usr/local/webserver/php/bin/phpize
+./configure --with-php-config=/usr/local/webserver/php/bin/php-config
+make
+make install
+cd ../
+
+tar jxvf eaccelerator-0.9.6.1.tar.bz2
+cd eaccelerator-0.9.6.1/
+/usr/local/webserver/php/bin/phpize
+./configure --enable-eaccelerator=shared --with-php-config=/usr/local/webserver/php/bin/php-config
+make
+make install
+cd ../
+
+tar zxvf PDO_MYSQL-1.0.2.tgz
+cd PDO_MYSQL-1.0.2/
+/usr/local/webserver/php/bin/phpize
+./configure --with-php-config=/usr/local/webserver/php/bin/php-config --with-pdo-mysql=/usr/local/webserver/mysql
+make
+make install
+cd ../
+
+
+5、修改php.ini文件
+
+　　手工修改：查找/usr/local/webserver/php/etc/php.ini中的extension_dir = "./"
+　　修改为extension_dir = "/usr/local/webserver/php/lib/php/extensions/no-debug-non-zts-20060613/"
+　　并在此行后增加以下几行，然后保存：
+　　extension = "memcache.so"
+　　extension = "pdo_mysql.so"
+
+　　再查找output_buffering = Off
+　　修改为output_buffering = On
+
+　　再查找; cgi.fix_pathinfo=0
+　　修改为cgi.fix_pathinfo=0，防止Nginx文件类型错误解析漏洞。
+
+6、配置eAccelerator加速PHP：
+mkdir -p /usr/local/webserver/eaccelerator_cache
+vi /usr/local/webserver/php/etc/php.ini
+按shift+g键跳到配置文件的最末尾，加上以下配置信息：
+[eaccelerator]
+zend_extension="/usr/local/webserver/php/lib/php/extensions/no-debug-non-zts-20060613/eaccelerator.so"
+eaccelerator.shm_size="1"
+eaccelerator.cache_dir="/usr/local/webserver/eaccelerator_cache"
+eaccelerator.enable="1"
+eaccelerator.optimizer="1"
+eaccelerator.check_mtime="1"
+eaccelerator.debug="0"
+eaccelerator.filter=""
+eaccelerator.shm_max="0"
+eaccelerator.shm_ttl="3600"
+eaccelerator.shm_prune_period="3600"
+eaccelerator.shm_only="0"
+eaccelerator.compress="1"
+eaccelerator.compress_level="9"
+eaccelerator.keys = "disk_only"
+eaccelerator.sessions = "disk_only"
+eaccelerator.content = "disk_only"
+
+7、创建www用户和组，以及供blog.s135.com和www.s135.com两个虚拟主机使用的目录：
+/usr/sbin/groupadd www
+/usr/sbin/useradd -g www www
+mkdir -p /data0/htdocs/blog
+chmod +w /data0/htdocs/blog
+chown -R www:www /data0/htdocs/blog
+mkdir -p /data0/htdocs/www
+chmod +w /data0/htdocs/www
+chown -R www:www /data0/htdocs/www
+
+
+8、创建php-fpm配置文件（php-fpm是为PHP打的一个FastCGI管理补丁，可以平滑变更php.ini配置而无需重启php-cgi）：
+在/usr/local/webserver/php/etc/目录中创建php-fpm.conf文件：
+rm -f /usr/local/webserver/php/etc/php-fpm.conf
+vi /usr/local/webserver/php/etc/php-fpm.conf
+ulimit -SHn 65535
+/usr/local/webserver/php/sbin/php-fpm start
+
+9、启动php-cgi进程，监听127.0.0.1的9000端口
+ulimit -SHn 65535
+/usr/local/webserver/php/sbin/php-fpm start
+
+注：/usr/local/webserver/php/sbin/php-fpm还有其他参数，包括：start|stop|quit|restart|reload|logrotate，修改php.ini后不重启php-cgi，重新加载配置文件使用reload。
+
+三、安装Nginx 1.0.0
+1、安装Nginx所需的pcre库：
+tar zxvf pcre-8.10.tar.gz
+cd pcre-8.10/
+./configure
+make && make install
+cd ../
+
+2、安装Nginx
+tar zxvf nginx-1.0.0.tar.gz
+cd nginx-1.0.0/
+./configure --user=www --group=www --prefix=/usr/local/webserver/nginx --with-http_stub_status_module --with-http_ssl_module --with-ipv6
+make && make install
+cd ../
+
+3、创建Nginx日志目录
+mkdir -p /data1/logs
+chmod +w /data1/logs
+chown -R www:www /data1/logs
+
+4、创建Nginx配置文件
+①、在/usr/local/webserver/nginx/conf/目录中创建nginx.conf文件：
+rm -f /usr/local/webserver/nginx/conf/nginx.conf
+vi /usr/local/webserver/nginx/conf/nginx.conf
+
+②、在/usr/local/webserver/nginx/conf/目录中创建fcgi.conf文件：
+vi /usr/local/webserver/nginx/conf/fcgi.conf
+
+5、启动Nginx
+ulimit -SHn 65535
+/usr/local/webserver/nginx/sbin/nginx
+
+四、配置开机自动启动Nginx + PHP
+vi /etc/rc.local
+
+　　在末尾增加以下内容：
+
+ulimit -SHn 65535
+/usr/local/webserver/php/sbin/php-fpm start
+/usr/local/webserver/nginx/sbin/nginx
+/data0/mysql/3306/mysql start
+
+
+
+
+
+
+-----------
+chmod a+x vhost.sh
+
+killall nginx
+killall mysqld mysqld_safe
+killall php-cgi
+/data0/mysql/3306/mysql stop
+
+ulimit -SHn 65535
+/usr/local/webserver/nginx/sbin/nginx
+/usr/local/webserver/php/sbin/php-fpm start
+/data0/mysql/3306/mysql start
+
+tar zcvf arch.tar.gz *
