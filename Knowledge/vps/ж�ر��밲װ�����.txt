@@ -1,0 +1,4 @@
+cd Ô´´úÂëÄ¿Â¼
+make clean
+./configure
+make uninstall
