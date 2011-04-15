@@ -318,7 +318,7 @@ vi /usr/local/webserver/nginx/sbin/cut_nginx_log.sh
 # This script run at 00:00
 
 # The Nginx logs path
-logs_path="/usr/local/webserver/nginx/logs/"
+logs_path="/data1/logs/"
 
 mkdir -p ${logs_path}$(date -d "yesterday" +"%Y")/$(date -d "yesterday" +"%m")/
 mv ${logs_path}access.log ${logs_path}$(date -d "yesterday" +"%Y")/$(date -d "yesterday" +"%m")/access_$(date -d "yesterday" +"%Y%m%d").log
@@ -331,6 +331,12 @@ crontab -e
 　　输入以下内容：
 引用
 00 00 * * * /bin/bash  /usr/local/webserver/nginx/sbin/cut_nginx_log.sh
+
+tar zxvf phpmyadmin.tar.gz
+mv phpmyadmin /home/wwwroot/
+chmod 755 -R /home/htdocs/phpmyadmin/
+chown www:www -R /home/htdocs/phpmyadmin/
+
 
 -----------
 chmod a+x vhost.sh
