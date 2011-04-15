@@ -3,3 +3,6 @@ grant ALL on *.* to test1@"localhost" Identified by "abc";    --增加用户可以本地
 DELETE FROM user WHERE User='user_name' and Host='host_name';    --删除用户
 
 FLUSH PRIVILEGES;    --更改用户后刷新数据库权限
+/usr/local/webserver/mysql/bin/mysql -uroot -ppengxing
+
+update user set password=password("pengxing") where user="root";
